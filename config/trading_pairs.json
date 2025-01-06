@@ -1,0 +1,8 @@
+{
+    "pairs": [
+        {"symbol": "XBT/USD", "kraken_symbol": "XXBTZUSD"},
+        {"symbol": "ETH/USD", "kraken_symbol": "XETHZUSD"},
+        {"symbol": "SOL/USD", "kraken_symbol": "SOLUSD"},
+        {"symbol": "LTC/USD", "kraken_symbol": "XLTCZUSD"}
+    ]
+}

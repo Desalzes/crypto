@@ -1,0 +1,8 @@
+{
+    "kraken_pairs": [
+        {"db": "BTC/USD", "exchange": "XBTUSD"},
+        {"db": "ETH/USD", "exchange": "ETHUSD"},
+        {"db": "SOL/USD", "exchange": "SOLUSD"},
+        {"db": "LTC/USD", "exchange": "LTCUSD"}
+    ]
+}

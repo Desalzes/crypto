@@ -1,0 +1,25 @@
+{
+    "pairs": {
+        "XBTUSD": {
+            "db_symbol": "BTC/USD",
+            "kraken_symbol": "XXBTZUSD",
+            "min_volume": 1000000
+        },
+        "ETHUSD": {
+            "db_symbol": "ETH/USD", 
+            "kraken_symbol": "XETHZUSD",
+            "min_volume": 500000
+        },
+        "SOLUSD": {
+            "db_symbol": "SOL/USD",
+            "kraken_symbol": "SOLUSD",
+            "min_volume": 100000
+        }
+    },
+    "timeframes": ["1m", "5m", "15m", "1h", "4h", "1d"],
+    "api": {
+        "request_timeout": 10,
+        "max_retries": 3,
+        "retry_delay": 2
+    }
+}
