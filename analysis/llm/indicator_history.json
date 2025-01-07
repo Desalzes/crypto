@@ -1,0 +1,93 @@
+{
+  "indicators": {
+    "MACD": {
+      "success_rate": 0.5,
+      "total_signals": 2,
+      "avg_profit": 0.0,
+      "signals": [
+        {
+          "timestamp": "2025-01-05T21:41:18.472184",
+          "reliability": 0.5,
+          "profit": 0
+        },
+        {
+          "timestamp": "2025-01-05T22:13:12.367731",
+          "reliability": 0.5,
+          "profit": 0
+        }
+      ]
+    },
+    "RSI": {
+      "success_rate": 0.7,
+      "total_signals": 2,
+      "avg_profit": 0.0,
+      "signals": [
+        {
+          "timestamp": "2025-01-05T21:41:18.472184",
+          "reliability": 0.7,
+          "profit": 0
+        },
+        {
+          "timestamp": "2025-01-05T22:13:12.367731",
+          "reliability": 0.7,
+          "profit": 0
+        }
+      ]
+    },
+    "Bollinger Bands": {
+      "success_rate": 0.6,
+      "total_signals": 2,
+      "avg_profit": 0.0,
+      "signals": [
+        {
+          "timestamp": "2025-01-05T21:41:18.472184",
+          "reliability": 0.6,
+          "profit": 0
+        },
+        {
+          "timestamp": "2025-01-05T22:13:12.367731",
+          "reliability": 0.6,
+          "profit": 0
+        }
+      ]
+    }
+  },
+  "patterns": [
+    {
+      "timestamp": "2025-01-05T21:41:18.472184",
+      "pattern": "Head and Shoulders Top (Bearish)",
+      "confidence": 0.4,
+      "profit": 0
+    },
+    {
+      "timestamp": "2025-01-05T21:41:18.472184",
+      "pattern": "Triangle (Neutral-Bullish)",
+      "confidence": 0.6,
+      "profit": 0
+    },
+    {
+      "timestamp": "2025-01-05T22:13:12.367731",
+      "pattern": "No identified successful patterns in the given data",
+      "confidence": 0.0,
+      "profit": 0
+    }
+  ],
+  "recommendations": [
+    {
+      "timestamp": "2025-01-05T21:41:18.472184",
+      "adjustments": [
+        "Add Stop Loss orders to limit potential losses",
+        "Consider using additional technical indicators such as Fibonacci retracement levels or Volume to confirm trade signals"
+      ],
+      "summary": "While the current market conditions are not ideal for clear buy or sell signals, there is evidence of consolidation and potentially bearish and bullish patterns forming. Adjusting indicator parameters and implementing a more conservative strategy could improve your chances in the crypto market."
+    },
+    {
+      "timestamp": "2025-01-05T22:13:12.367731",
+      "adjustments": [
+        "Expand the dataset for pattern analysis to gather more accurate results",
+        "Increase the number of signals analyzed for each indicator"
+      ],
+      "summary": "The current strategy relies on indicators with moderate to low success rates, and no successful patterns have been identified in the given data. To improve the performance, consider expanding the dataset for pattern analysis and increasing the number of signals analyzed for each indicator."
+    }
+  ]
+}

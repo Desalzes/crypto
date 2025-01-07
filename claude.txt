@@ -1,0 +1,93 @@
+---DO NOT CHANGE OR MAKE NEW DATABASE FILES, ADD NEW CONNECTIONS OR ANYTHING WITHOUT ASKING ME FIRST. THE PROGRAM ALREADY HAS ALOT OF FEATURES I DONT NEED REDUNDANCIES
+This is a cryptocurrency and stock trading bot with both automated trading and research capabilities. The system combines machine learning predictions with traditional technical analysis to make trading decisions.
+
+
+
+FIRST THING THAT NEEDS TO BE DONE IS THE PARAMETER OPTIMIZER FOR CRYPTO, CLAUDE IF YOU SEE THIS REMIND ME
+
+# Architecture
+
+## 1. Core Components
+
+### main.py
+- Class: TradingManager
+  - Initializes and coordinates all trading components
+  - Manages parallel analysis of trading pairs
+  - Handles menu-driven interface for crypto/stock trading modes
+
+### database/db_manager.py
+- Class: DatabaseManager
+  - Manages SQLite database for trade logging
+  - Tracks indicator performance
+  - Stores historical trade data
+
+### trading/crypto_strategy.py
+- Class: CryptoStrategy
+  - Combines ML predictions with technical indicators
+  - Calculates position sizes and trade signals
+  - Implements risk management rules
+  - Key Methods:
+    - analyze_all_timeframes: Core analysis pipeline
+    - calculate_position_size: Position sizing logic
+    - _calculate_combined_score: Signal generation
+
+### market_data/kraken_feed.py
+- Class: KrakenFeed
+  - Handles all market data retrieval
+  - Implements caching for efficiency
+  - Supports multiple timeframes
+  - Key Methods:
+    - get_active_pairs: Fetches top trading pairs
+    - get_ohlc: Retrieves candlestick data
+    - get_historical_data: Gets training data for ML
+
+### trading/paper_trader.py
+- Class: PaperTrader
+  - Simulates trading execution
+  - Manages portfolio and positions
+  - Tracks P&L and trade history
+
+### analysis/ml_classifier.py
+- Class: MarketClassifier
+  - Implements ML prediction model
+  - Feature engineering from market data
+  - Training and prediction pipeline
+  - Uses RandomForest for classification
+
+## 2. Configuration
+
+### config/indicators_config.json
+- Technical indicator parameters
+- Risk management settings
+- Trading thresholds
+- System configuration
+
+## 3. Data Management
+
+### Database
+- trading.db: SQLite database for trade history
+- trade_history.json: Detailed trade records
+- trading_state.json: Current portfolio state
+
+### Data Directory
+- historical/: Storage for historical price data
+- Models directory present but empty (for future ML model persistence)
+
+## 4. Utilities
+- error_handler.py: Logging and error management
+- Various utility functions for data processing
+
+# Notable Features
+1. Multi-timeframe analysis
+2. Parallel processing of trading pairs
+3. Combined ML + Technical indicator approach
+4. Performance tracking and analysis
+5. Paper trading capabilities
+6. Menu-driven interface for different trading modes
+
+# Potential Improvements
+1. Implementation of ML model persistence
+2. Enhanced error handling
+3. Documentation improvements
+4. Test suite development
+5. Real trading integration beyond paper trading

@@ -1,0 +1,61 @@
+{
+  "indicators": {
+    "EMA": {
+      "periods": {
+        "fast": 12,
+        "slow": 26
+      },
+      "weight": 0.7
+    },
+    "RSI": {
+      "period": 14,
+      "overbought": 70,
+      "oversold": 30,
+      "weight": 0.6
+    },
+    "MACD": {
+      "fast_period": 12,
+      "slow_period": 26,
+      "signal_period": 9,
+      "weight": 0.65
+    },
+    "BB": {
+      "period": 20,
+      "std_dev": 2,
+      "weight": 0.55
+    },
+    "ICH": {
+      "conversion_line_period": 9,
+      "base_line_period": 26,
+      "lagging_span_period": 52,
+      "displacement": 26,
+      "weight": 0.6
+    }
+  },
+  "timeframes": {
+    "1m": 0.3,
+    "5m": 0.5,
+    "15m": 0.7,
+    "1h": 0.8,
+    "4h": 0.9,
+    "1d": 1.0
+  },
+  "ml_model": {
+    "weight": 0.8,
+    "confidence_threshold": 0.7,
+    "update_frequency": "1h"
+  },
+  "strategy": {
+    "risk_level": "medium",
+    "max_position_size": 0.1,
+    "stop_loss": 0.02,
+    "take_profit": 0.05,
+    "max_trades_per_day": 10,
+    "min_volume_24h": 1000000,
+    "indicator_analysis": {
+      "min_reliability": 0.3,
+      "high_reliability": 0.7,
+      "test_threshold": 3
+    }
+  }
+}
