@@ -1,8 +1,14 @@
 {
     "kraken_pairs": [
-        {"db": "BTC/USD", "exchange": "XBTUSD"},
-        {"db": "ETH/USD", "exchange": "ETHUSD"},
-        {"db": "SOL/USD", "exchange": "SOLUSD"},
-        {"db": "LTC/USD", "exchange": "LTCUSD"}
+        {"db": "BTCUSD", "exchange": "XXBTZUSD"},
+        {"db": "ETHUSD", "exchange": "XETHZUSD"},
+        {"db": "SOLUSD", "exchange": "SOLUSD"},
+        {"db": "LTCUSD", "exchange": "XLTCZUSD"},
+        {"db": "LINKUSD", "exchange": "LINKUSD"},
+        {"db": "DOTUSD", "exchange": "DOTUSD"},
+        {"db": "MATICUSD", "exchange": "MATICUSD"},
+        {"db": "AVAXUSD", "exchange": "AVAXUSD"},
+        {"db": "ATOMUSD", "exchange": "ATOMUSD"},
+        {"db": "APEUSD", "exchange": "APEUSD"}
     ]
 }

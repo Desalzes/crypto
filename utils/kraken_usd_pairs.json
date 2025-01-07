@@ -1,0 +1,1402 @@
+[
+  {
+    "pair": "MOGUSD",
+    "altname": "MOGUSD",
+    "base": "MOG",
+    "quote": "ZUSD",
+    "volume_24h": 597905747135.676
+  },
+  {
+    "pair": "PEPEUSD",
+    "altname": "PEPEUSD",
+    "base": "PEPE",
+    "quote": "ZUSD",
+    "volume_24h": 302825103201.9679
+  },
+  {
+    "pair": "BTTUSD",
+    "altname": "BTTUSD",
+    "base": "BTT",
+    "quote": "ZUSD",
+    "volume_24h": 83943174672.88602
+  },
+  {
+    "pair": "SHIBUSD",
+    "altname": "SHIBUSD",
+    "base": "SHIB",
+    "quote": "ZUSD",
+    "volume_24h": 63146841260.02316
+  },
+  {
+    "pair": "BONKUSD",
+    "altname": "BONKUSD",
+    "base": "BONK",
+    "quote": "ZUSD",
+    "volume_24h": 25578239498.465
+  },
+  {
+    "pair": "LUNAUSD",
+    "altname": "LUNAUSD",
+    "base": "LUNA",
+    "quote": "ZUSD",
+    "volume_24h": 5189937381.674833
+  },
+  {
+    "pair": "FLOKIUSD",
+    "altname": "FLOKIUSD",
+    "base": "FLOKI",
+    "quote": "ZUSD",
+    "volume_24h": 1310578787.7402763
+  },
+  {
+    "pair": "KINUSD",
+    "altname": "KINUSD",
+    "base": "KIN",
+    "quote": "ZUSD",
+    "volume_24h": 985972965.2217
+  },
+  {
+    "pair": "APUUSD",
+    "altname": "APUUSD",
+    "base": "APU",
+    "quote": "ZUSD",
+    "volume_24h": 876976252.10411
+  },
+  {
+    "pair": "MXCUSD",
+    "altname": "MXCUSD",
+    "base": "MXC",
+    "quote": "ZUSD",
+    "volume_24h": 610585692.9581908
+  },
+  {
+    "pair": "BSXUSD",
+    "altname": "BSXUSD",
+    "base": "BSX",
+    "quote": "ZUSD",
+    "volume_24h": 488198160.83092874
+  },
+  {
+    "pair": "WENUSD",
+    "altname": "WENUSD",
+    "base": "WEN",
+    "quote": "ZUSD",
+    "volume_24h": 152143993.68508428
+  },
+  {
+    "pair": "SPELLUSD",
+    "altname": "SPELLUSD",
+    "base": "SPELL",
+    "quote": "ZUSD",
+    "volume_24h": 115595416.65696879
+  },
+  {
+    "pair": "USDTZUSD",
+    "altname": "USDTUSD",
+    "base": "USDT",
+    "quote": "ZUSD",
+    "volume_24h": 111265271.04312196
+  },
+  {
+    "pair": "XCNUSD",
+    "altname": "XCNUSD",
+    "base": "XCN",
+    "quote": "ZUSD",
+    "volume_24h": 81921988.48865119
+  },
+  {
+    "pair": "SCUSD",
+    "altname": "SCUSD",
+    "base": "SC",
+    "quote": "ZUSD",
+    "volume_24h": 75799308.56658892
+  },
+  {
+    "pair": "TURBOUSD",
+    "altname": "TURBOUSD",
+    "base": "TURBO",
+    "quote": "ZUSD",
+    "volume_24h": 56211517.90958962
+  },
+  {
+    "pair": "KEYUSD",
+    "altname": "KEYUSD",
+    "base": "KEY",
+    "quote": "ZUSD",
+    "volume_24h": 53101641.23108876
+  },
+  {
+    "pair": "NEIROUSD",
+    "altname": "NEIROUSD",
+    "base": "NEIRO",
+    "quote": "ZUSD",
+    "volume_24h": 45034047.70471
+  },
+  {
+    "pair": "XDGUSD",
+    "altname": "XDGUSD",
+    "base": "XXDG",
+    "quote": "ZUSD",
+    "volume_24h": 37081048.23092347
+  },
+  {
+    "pair": "BEAMUSD",
+    "altname": "BEAMUSD",
+    "base": "BEAM",
+    "quote": "ZUSD",
+    "volume_24h": 32039535.27089
+  },
+  {
+    "pair": "BODENUSD",
+    "altname": "BODENUSD",
+    "base": "BODEN",
+    "quote": "ZUSD",
+    "volume_24h": 27602579.76097
+  },
+  {
+    "pair": "RSRUSD",
+    "altname": "RSRUSD",
+    "base": "RSR",
+    "quote": "ZUSD",
+    "volume_24h": 26011951.62558
+  },
+  {
+    "pair": "ALGOUSD",
+    "altname": "ALGOUSD",
+    "base": "ALGO",
+    "quote": "ZUSD",
+    "volume_24h": 23971932.93513774
+  },
+  {
+    "pair": "USDCUSD",
+    "altname": "USDCUSD",
+    "base": "USDC",
+    "quote": "ZUSD",
+    "volume_24h": 23641215.76759511
+  },
+  {
+    "pair": "FLRUSD",
+    "altname": "FLRUSD",
+    "base": "FLR",
+    "quote": "ZUSD",
+    "volume_24h": 20210289.17880927
+  },
+  {
+    "pair": "GALAUSD",
+    "altname": "GALAUSD",
+    "base": "GALA",
+    "quote": "ZUSD",
+    "volume_24h": 19064101.52445159
+  },
+  {
+    "pair": "MIRUSD",
+    "altname": "MIRUSD",
+    "base": "MIR",
+    "quote": "ZUSD",
+    "volume_24h": 15314072.87337899
+  },
+  {
+    "pair": "ZEURZUSD",
+    "altname": "EURUSD",
+    "base": "ZEUR",
+    "quote": "ZUSD",
+    "volume_24h": 15115348.30241666
+  },
+  {
+    "pair": "MEWUSD",
+    "altname": "MEWUSD",
+    "base": "MEW",
+    "quote": "ZUSD",
+    "volume_24h": 13825964.18585
+  },
+  {
+    "pair": "XXRPZUSD",
+    "altname": "XRPUSD",
+    "base": "XXRP",
+    "quote": "ZUSD",
+    "volume_24h": 12341800.14810057
+  },
+  {
+    "pair": "JASMYUSD",
+    "altname": "JASMYUSD",
+    "base": "JASMY",
+    "quote": "ZUSD",
+    "volume_24h": 10512336.23852981
+  },
+  {
+    "pair": "NODLUSD",
+    "altname": "NODLUSD",
+    "base": "NODL",
+    "quote": "ZUSD",
+    "volume_24h": 10070249.9989646
+  },
+  {
+    "pair": "ATLASUSD",
+    "altname": "ATLASUSD",
+    "base": "ATLAS",
+    "quote": "ZUSD",
+    "volume_24h": 9818529.23439632
+  },
+  {
+    "pair": "ADAUSD",
+    "altname": "ADAUSD",
+    "base": "ADA",
+    "quote": "ZUSD",
+    "volume_24h": 9064986.94052328
+  },
+  {
+    "pair": "KASUSD",
+    "altname": "KASUSD",
+    "base": "KAS",
+    "quote": "ZUSD",
+    "volume_24h": 8631264.94818
+  },
+  {
+    "pair": "FWOGUSD",
+    "altname": "FWOGUSD",
+    "base": "FWOG",
+    "quote": "ZUSD",
+    "volume_24h": 8508455.08495
+  },
+  {
+    "pair": "GIGAUSD",
+    "altname": "GIGAUSD",
+    "base": "GIGA",
+    "quote": "ZUSD",
+    "volume_24h": 8235332.3277
+  },
+  {
+    "pair": "XXLMZUSD",
+    "altname": "XLMUSD",
+    "base": "XXLM",
+    "quote": "ZUSD",
+    "volume_24h": 8194032.22866171
+  },
+  {
+    "pair": "FTMUSD",
+    "altname": "FTMUSD",
+    "base": "FTM",
+    "quote": "ZUSD",
+    "volume_24h": 7883311.63446007
+  },
+  {
+    "pair": "TRXUSD",
+    "altname": "TRXUSD",
+    "base": "TRX",
+    "quote": "ZUSD",
+    "volume_24h": 7655144.79962849
+  },
+  {
+    "pair": "SGBUSD",
+    "altname": "SGBUSD",
+    "base": "SGB",
+    "quote": "ZUSD",
+    "volume_24h": 6459218.50927802
+  },
+  {
+    "pair": "TREMPUSD",
+    "altname": "TREMPUSD",
+    "base": "TREMP",
+    "quote": "ZUSD",
+    "volume_24h": 6011373.93354
+  },
+  {
+    "pair": "DENTUSD",
+    "altname": "DENTUSD",
+    "base": "DENT",
+    "quote": "ZUSD",
+    "volume_24h": 5659617.32703688
+  },
+  {
+    "pair": "ZGBPZUSD",
+    "altname": "GBPUSD",
+    "base": "ZGBP",
+    "quote": "ZUSD",
+    "volume_24h": 5053200.2493068
+  },
+  {
+    "pair": "USTUSD",
+    "altname": "USTUSD",
+    "base": "UST",
+    "quote": "ZUSD",
+    "volume_24h": 4712154.82419022
+  },
+  {
+    "pair": "CRVUSD",
+    "altname": "CRVUSD",
+    "base": "CRV",
+    "quote": "ZUSD",
+    "volume_24h": 4697063.26545509
+  },
+  {
+    "pair": "SBRUSD",
+    "altname": "SBRUSD",
+    "base": "SBR",
+    "quote": "ZUSD",
+    "volume_24h": 4598625.98537091
+  },
+  {
+    "pair": "ARBUSD",
+    "altname": "ARBUSD",
+    "base": "ARB",
+    "quote": "ZUSD",
+    "volume_24h": 4518819.22536
+  },
+  {
+    "pair": "ATHUSD",
+    "altname": "ATHUSD",
+    "base": "ATH",
+    "quote": "ZUSD",
+    "volume_24h": 2823971.85031
+  },
+  {
+    "pair": "AUDUSD",
+    "altname": "AUDUSD",
+    "base": "ZAUD",
+    "quote": "ZUSD",
+    "volume_24h": 2797393.40870261
+  },
+  {
+    "pair": "PONDUSD",
+    "altname": "PONDUSD",
+    "base": "POND",
+    "quote": "ZUSD",
+    "volume_24h": 2710083.7463877
+  },
+  {
+    "pair": "SPXUSD",
+    "altname": "SPXUSD",
+    "base": "SPX",
+    "quote": "ZUSD",
+    "volume_24h": 2673046.30824
+  },
+  {
+    "pair": "RENUSD",
+    "altname": "RENUSD",
+    "base": "REN",
+    "quote": "ZUSD",
+    "volume_24h": 2306426.50965477
+  },
+  {
+    "pair": "SEIUSD",
+    "altname": "SEIUSD",
+    "base": "SEI",
+    "quote": "ZUSD",
+    "volume_24h": 1813794.93805
+  },
+  {
+    "pair": "GSTUSD",
+    "altname": "GSTUSD",
+    "base": "GST",
+    "quote": "ZUSD",
+    "volume_24h": 1811892.35132199
+  },
+  {
+    "pair": "PHAUSD",
+    "altname": "PHAUSD",
+    "base": "PHA",
+    "quote": "ZUSD",
+    "volume_24h": 1728276.47961059
+  },
+  {
+    "pair": "SUIUSD",
+    "altname": "SUIUSD",
+    "base": "SUI",
+    "quote": "ZUSD",
+    "volume_24h": 1592347.62824
+  },
+  {
+    "pair": "SANDUSD",
+    "altname": "SANDUSD",
+    "base": "SAND",
+    "quote": "ZUSD",
+    "volume_24h": 1469616.68036581
+  },
+  {
+    "pair": "SWELLUSD",
+    "altname": "SWELLUSD",
+    "base": "SWELL",
+    "quote": "ZUSD",
+    "volume_24h": 1367354.06572
+  },
+  {
+    "pair": "ONDOUSD",
+    "altname": "ONDOUSD",
+    "base": "ONDO",
+    "quote": "ZUSD",
+    "volume_24h": 1362768.30779
+  },
+  {
+    "pair": "GRTUSD",
+    "altname": "GRTUSD",
+    "base": "GRT",
+    "quote": "ZUSD",
+    "volume_24h": 1360889.76631138
+  },
+  {
+    "pair": "FETUSD",
+    "altname": "FETUSD",
+    "base": "FET",
+    "quote": "ZUSD",
+    "volume_24h": 1273666.09415529
+  },
+  {
+    "pair": "BATUSD",
+    "altname": "BATUSD",
+    "base": "BAT",
+    "quote": "ZUSD",
+    "volume_24h": 1153391.35480035
+  },
+  {
+    "pair": "LCXUSD",
+    "altname": "LCXUSD",
+    "base": "LCX",
+    "quote": "ZUSD",
+    "volume_24h": 1128401.48590698
+  },
+  {
+    "pair": "XTZUSD",
+    "altname": "XTZUSD",
+    "base": "XTZ",
+    "quote": "ZUSD",
+    "volume_24h": 1118182.15977489
+  },
+  {
+    "pair": "CPOOLUSD",
+    "altname": "CPOOLUSD",
+    "base": "CPOOL",
+    "quote": "ZUSD",
+    "volume_24h": 1112616.96744
+  },
+  {
+    "pair": "ENAUSD",
+    "altname": "ENAUSD",
+    "base": "ENA",
+    "quote": "ZUSD",
+    "volume_24h": 1102925.54596
+  },
+  {
+    "pair": "POLISUSD",
+    "altname": "POLISUSD",
+    "base": "POLIS",
+    "quote": "ZUSD",
+    "volume_24h": 985337.304119
+  },
+  {
+    "pair": "ACHUSD",
+    "altname": "ACHUSD",
+    "base": "ACH",
+    "quote": "ZUSD",
+    "volume_24h": 979697.58658642
+  },
+  {
+    "pair": "SAMOUSD",
+    "altname": "SAMOUSD",
+    "base": "SAMO",
+    "quote": "ZUSD",
+    "volume_24h": 948304.21995202
+  },
+  {
+    "pair": "CQTUSD",
+    "altname": "CQTUSD",
+    "base": "CQT",
+    "quote": "ZUSD",
+    "volume_24h": 946403.17385112
+  },
+  {
+    "pair": "GOATUSD",
+    "altname": "GOATUSD",
+    "base": "GOAT",
+    "quote": "ZUSD",
+    "volume_24h": 945207.00356
+  },
+  {
+    "pair": "WIFUSD",
+    "altname": "WIFUSD",
+    "base": "WIF",
+    "quote": "ZUSD",
+    "volume_24h": 907485.74704
+  },
+  {
+    "pair": "ZEUSUSD",
+    "altname": "ZEUSUSD",
+    "base": "ZEUS",
+    "quote": "ZUSD",
+    "volume_24h": 900793.8158
+  },
+  {
+    "pair": "TLMUSD",
+    "altname": "TLMUSD",
+    "base": "TLM",
+    "quote": "ZUSD",
+    "volume_24h": 891509.04669079
+  },
+  {
+    "pair": "CLOUDUSD",
+    "altname": "CLOUDUSD",
+    "base": "CLOUD",
+    "quote": "ZUSD",
+    "volume_24h": 887110.2819
+  },
+  {
+    "pair": "BLZUSD",
+    "altname": "BLZUSD",
+    "base": "BLZ",
+    "quote": "ZUSD",
+    "volume_24h": 820797.33749581
+  },
+  {
+    "pair": "RBCUSD",
+    "altname": "RBCUSD",
+    "base": "RBC",
+    "quote": "ZUSD",
+    "volume_24h": 768122.97578119
+  },
+  {
+    "pair": "STXUSD",
+    "altname": "STXUSD",
+    "base": "STX",
+    "quote": "ZUSD",
+    "volume_24h": 727656.24291712
+  },
+  {
+    "pair": "ANKRUSD",
+    "altname": "ANKRUSD",
+    "base": "ANKR",
+    "quote": "ZUSD",
+    "volume_24h": 727482.47397029
+  },
+  {
+    "pair": "ENJUSD",
+    "altname": "ENJUSD",
+    "base": "ENJ",
+    "quote": "ZUSD",
+    "volume_24h": 692570.91391588
+  },
+  {
+    "pair": "WOOUSD",
+    "altname": "WOOUSD",
+    "base": "WOO",
+    "quote": "ZUSD",
+    "volume_24h": 692240.0228363
+  },
+  {
+    "pair": "PYTHUSD",
+    "altname": "PYTHUSD",
+    "base": "PYTH",
+    "quote": "ZUSD",
+    "volume_24h": 686780.12481
+  },
+  {
+    "pair": "ZKUSD",
+    "altname": "ZKUSD",
+    "base": "ZK",
+    "quote": "ZUSD",
+    "volume_24h": 667129.22854
+  },
+  {
+    "pair": "OSMOUSD",
+    "altname": "OSMOUSD",
+    "base": "OSMO",
+    "quote": "ZUSD",
+    "volume_24h": 660365.1074
+  },
+  {
+    "pair": "POPCATUSD",
+    "altname": "POPCATUSD",
+    "base": "POPCAT",
+    "quote": "ZUSD",
+    "volume_24h": 660327.80711
+  },
+  {
+    "pair": "LUNA2USD",
+    "altname": "LUNA2USD",
+    "base": "LUNA2",
+    "quote": "ZUSD",
+    "volume_24h": 642903.93687755
+  },
+  {
+    "pair": "MANAUSD",
+    "altname": "MANAUSD",
+    "base": "MANA",
+    "quote": "ZUSD",
+    "volume_24h": 592549.12450038
+  },
+  {
+    "pair": "CHZUSD",
+    "altname": "CHZUSD",
+    "base": "CHZ",
+    "quote": "ZUSD",
+    "volume_24h": 586579.13124009
+  },
+  {
+    "pair": "HDXUSD",
+    "altname": "HDXUSD",
+    "base": "HDX",
+    "quote": "ZUSD",
+    "volume_24h": 586217.83223
+  },
+  {
+    "pair": "BRICKUSD",
+    "altname": "BRICKUSD",
+    "base": "BRICK",
+    "quote": "ZUSD",
+    "volume_24h": 540857.96655
+  },
+  {
+    "pair": "LDOUSD",
+    "altname": "LDOUSD",
+    "base": "LDO",
+    "quote": "ZUSD",
+    "volume_24h": 523200.52077486
+  },
+  {
+    "pair": "GARIUSD",
+    "altname": "GARIUSD",
+    "base": "GARI",
+    "quote": "ZUSD",
+    "volume_24h": 518950.88011947
+  },
+  {
+    "pair": "AIRUSD",
+    "altname": "AIRUSD",
+    "base": "AIR",
+    "quote": "ZUSD",
+    "volume_24h": 501308.74519443
+  },
+  {
+    "pair": "OCEANUSD",
+    "altname": "OCEANUSD",
+    "base": "OCEAN",
+    "quote": "ZUSD",
+    "volume_24h": 491574.95784439
+  },
+  {
+    "pair": "MINAUSD",
+    "altname": "MINAUSD",
+    "base": "MINA",
+    "quote": "ZUSD",
+    "volume_24h": 487081.42235292
+  },
+  {
+    "pair": "MATICUSD",
+    "altname": "MATICUSD",
+    "base": "MATIC",
+    "quote": "ZUSD",
+    "volume_24h": 486516.8997202
+  },
+  {
+    "pair": "DAIUSD",
+    "altname": "DAIUSD",
+    "base": "DAI",
+    "quote": "ZUSD",
+    "volume_24h": 484142.55512969
+  },
+  {
+    "pair": "PONKEUSD",
+    "altname": "PONKEUSD",
+    "base": "PONKE",
+    "quote": "ZUSD",
+    "volume_24h": 467135.03117
+  },
+  {
+    "pair": "GMTUSD",
+    "altname": "GMTUSD",
+    "base": "GMT",
+    "quote": "ZUSD",
+    "volume_24h": 443221.02755126
+  },
+  {
+    "pair": "ICXUSD",
+    "altname": "ICXUSD",
+    "base": "ICX",
+    "quote": "ZUSD",
+    "volume_24h": 438125.04384304
+  },
+  {
+    "pair": "FILUSD",
+    "altname": "FILUSD",
+    "base": "FIL",
+    "quote": "ZUSD",
+    "volume_24h": 430208.66649706
+  },
+  {
+    "pair": "TRUUSD",
+    "altname": "TRUUSD",
+    "base": "TRU",
+    "quote": "ZUSD",
+    "volume_24h": 387299.09292401
+  },
+  {
+    "pair": "BLURUSD",
+    "altname": "BLURUSD",
+    "base": "BLUR",
+    "quote": "ZUSD",
+    "volume_24h": 377177.98414
+  },
+  {
+    "pair": "MORPHOUSD",
+    "altname": "MORPHOUSD",
+    "base": "MORPHO",
+    "quote": "ZUSD",
+    "volume_24h": 368062.57509
+  },
+  {
+    "pair": "CXTUSD",
+    "altname": "CXTUSD",
+    "base": "CXT",
+    "quote": "ZUSD",
+    "volume_24h": 345277.59123
+  },
+  {
+    "pair": "IDEXUSD",
+    "altname": "IDEXUSD",
+    "base": "IDEX",
+    "quote": "ZUSD",
+    "volume_24h": 340123.31705257
+  },
+  {
+    "pair": "MEMEUSD",
+    "altname": "MEMEUSD",
+    "base": "MEME",
+    "quote": "ZUSD",
+    "volume_24h": 335406.54228
+  },
+  {
+    "pair": "MVUSD",
+    "altname": "MVUSD",
+    "base": "MV",
+    "quote": "ZUSD",
+    "volume_24h": 334123.17257053
+  },
+  {
+    "pair": "SRMUSD",
+    "altname": "SRMUSD",
+    "base": "SRM",
+    "quote": "ZUSD",
+    "volume_24h": 324734.08945135
+  },
+  {
+    "pair": "1INCHUSD",
+    "altname": "1INCHUSD",
+    "base": "1INCH",
+    "quote": "ZUSD",
+    "volume_24h": 294458.37608134
+  },
+  {
+    "pair": "CELRUSD",
+    "altname": "CELRUSD",
+    "base": "CELR",
+    "quote": "ZUSD",
+    "volume_24h": 293674.66212626
+  },
+  {
+    "pair": "POLUSD",
+    "altname": "POLUSD",
+    "base": "POL",
+    "quote": "ZUSD",
+    "volume_24h": 291276.68662
+  },
+  {
+    "pair": "MOONUSD",
+    "altname": "MOONUSD",
+    "base": "MOON",
+    "quote": "ZUSD",
+    "volume_24h": 287188.80951
+  },
+  {
+    "pair": "ATOMUSD",
+    "altname": "ATOMUSD",
+    "base": "ATOM",
+    "quote": "ZUSD",
+    "volume_24h": 282515.30005072
+  },
+  {
+    "pair": "SCRTUSD",
+    "altname": "SCRTUSD",
+    "base": "SCRT",
+    "quote": "ZUSD",
+    "volume_24h": 282267.8897208
+  },
+  {
+    "pair": "COTIUSD",
+    "altname": "COTIUSD",
+    "base": "COTI",
+    "quote": "ZUSD",
+    "volume_24h": 281533.63096089
+  },
+  {
+    "pair": "HONEYUSD",
+    "altname": "HONEYUSD",
+    "base": "HONEY",
+    "quote": "ZUSD",
+    "volume_24h": 279528.54286
+  },
+  {
+    "pair": "LRCUSD",
+    "altname": "LRCUSD",
+    "base": "LRC",
+    "quote": "ZUSD",
+    "volume_24h": 271450.51169806
+  },
+  {
+    "pair": "ASTRUSD",
+    "altname": "ASTRUSD",
+    "base": "ASTR",
+    "quote": "ZUSD",
+    "volume_24h": 264351.9773089
+  },
+  {
+    "pair": "JUNOUSD",
+    "altname": "JUNOUSD",
+    "base": "JUNO",
+    "quote": "ZUSD",
+    "volume_24h": 262938.38259485
+  },
+  {
+    "pair": "AKTUSD",
+    "altname": "AKTUSD",
+    "base": "AKT",
+    "quote": "ZUSD",
+    "volume_24h": 258688.76795463
+  },
+  {
+    "pair": "RAREUSD",
+    "altname": "RAREUSD",
+    "base": "RARE",
+    "quote": "ZUSD",
+    "volume_24h": 257354.2556375
+  },
+  {
+    "pair": "NEARUSD",
+    "altname": "NEARUSD",
+    "base": "NEAR",
+    "quote": "ZUSD",
+    "volume_24h": 251479.73315839
+  },
+  {
+    "pair": "TIAUSD",
+    "altname": "TIAUSD",
+    "base": "TIA",
+    "quote": "ZUSD",
+    "volume_24h": 228668.96172
+  },
+  {
+    "pair": "RENDERUSD",
+    "altname": "RENDERUSD",
+    "base": "RENDER",
+    "quote": "ZUSD",
+    "volume_24h": 228086.96358
+  },
+  {
+    "pair": "DBRUSD",
+    "altname": "DBRUSD",
+    "base": "DBR",
+    "quote": "ZUSD",
+    "volume_24h": 227517.38022
+  },
+  {
+    "pair": "STORJUSD",
+    "altname": "STORJUSD",
+    "base": "STORJ",
+    "quote": "ZUSD",
+    "volume_24h": 214087.63710928
+  },
+  {
+    "pair": "SUSHIUSD",
+    "altname": "SUSHIUSD",
+    "base": "SUSHI",
+    "quote": "ZUSD",
+    "volume_24h": 212770.37082867
+  },
+  {
+    "pair": "JUPUSD",
+    "altname": "JUPUSD",
+    "base": "JUP",
+    "quote": "ZUSD",
+    "volume_24h": 208817.41289
+  },
+  {
+    "pair": "L3USD",
+    "altname": "L3USD",
+    "base": "L3",
+    "quote": "ZUSD",
+    "volume_24h": 200015.03652
+  },
+  {
+    "pair": "CSMUSD",
+    "altname": "CSMUSD",
+    "base": "CSM",
+    "quote": "ZUSD",
+    "volume_24h": 198696.58209166
+  },
+  {
+    "pair": "STRKUSD",
+    "altname": "STRKUSD",
+    "base": "STRK",
+    "quote": "ZUSD",
+    "volume_24h": 191927.44915
+  },
+  {
+    "pair": "VANRYUSD",
+    "altname": "VANRYUSD",
+    "base": "VANRY",
+    "quote": "ZUSD",
+    "volume_24h": 188391.33284
+  },
+  {
+    "pair": "GLMRUSD",
+    "altname": "GLMRUSD",
+    "base": "GLMR",
+    "quote": "ZUSD",
+    "volume_24h": 181334.25960055
+  },
+  {
+    "pair": "OXTUSD",
+    "altname": "OXTUSD",
+    "base": "OXT",
+    "quote": "ZUSD",
+    "volume_24h": 181079.85352156
+  },
+  {
+    "pair": "AVAXUSD",
+    "altname": "AVAXUSD",
+    "base": "AVAX",
+    "quote": "ZUSD",
+    "volume_24h": 180421.37255125
+  },
+  {
+    "pair": "KAVAUSD",
+    "altname": "KAVAUSD",
+    "base": "KAVA",
+    "quote": "ZUSD",
+    "volume_24h": 176070.04370813
+  },
+  {
+    "pair": "TUSD",
+    "altname": "TUSD",
+    "base": "T",
+    "quote": "ZUSD",
+    "volume_24h": 172166.99298099
+  },
+  {
+    "pair": "DOTUSD",
+    "altname": "DOTUSD",
+    "base": "DOT",
+    "quote": "ZUSD",
+    "volume_24h": 171657.21710438
+  },
+  {
+    "pair": "OMGUSD",
+    "altname": "OMGUSD",
+    "base": "OMG",
+    "quote": "ZUSD",
+    "volume_24h": 171018.15711494
+  },
+  {
+    "pair": "FLOWUSD",
+    "altname": "FLOWUSD",
+    "base": "FLOW",
+    "quote": "ZUSD",
+    "volume_24h": 163563.36227641
+  },
+  {
+    "pair": "LINKUSD",
+    "altname": "LINKUSD",
+    "base": "LINK",
+    "quote": "ZUSD",
+    "volume_24h": 161163.29185007
+  },
+  {
+    "pair": "SYNUSD",
+    "altname": "SYNUSD",
+    "base": "SYN",
+    "quote": "ZUSD",
+    "volume_24h": 160381.0022505
+  },
+  {
+    "pair": "WUSD",
+    "altname": "WUSD",
+    "base": "W",
+    "quote": "ZUSD",
+    "volume_24h": 152574.29323
+  },
+  {
+    "pair": "EURQUSD",
+    "altname": "EURQUSD",
+    "base": "EURQ",
+    "quote": "ZUSD",
+    "volume_24h": 150209.7837
+  },
+  {
+    "pair": "CFGUSD",
+    "altname": "CFGUSD",
+    "base": "CFG",
+    "quote": "ZUSD",
+    "volume_24h": 145689.73461885
+  },
+  {
+    "pair": "MNTUSD",
+    "altname": "MNTUSD",
+    "base": "MNT",
+    "quote": "ZUSD",
+    "volume_24h": 141618.20317
+  },
+  {
+    "pair": "MNGOUSD",
+    "altname": "MNGOUSD",
+    "base": "MNGO",
+    "quote": "ZUSD",
+    "volume_24h": 141313.00175098
+  },
+  {
+    "pair": "APEUSD",
+    "altname": "APEUSD",
+    "base": "APE",
+    "quote": "ZUSD",
+    "volume_24h": 140803.62100599
+  },
+  {
+    "pair": "PUFFERUSD",
+    "altname": "PUFFERUSD",
+    "base": "PUFFER",
+    "quote": "ZUSD",
+    "volume_24h": 138960.69569
+  },
+  {
+    "pair": "PNUTUSD",
+    "altname": "PNUTUSD",
+    "base": "PNUT",
+    "quote": "ZUSD",
+    "volume_24h": 136435.73735
+  },
+  {
+    "pair": "ICPUSD",
+    "altname": "ICPUSD",
+    "base": "ICP",
+    "quote": "ZUSD",
+    "volume_24h": 133262.27800653
+  },
+  {
+    "pair": "SUPERUSD",
+    "altname": "SUPERUSD",
+    "base": "SUPER",
+    "quote": "ZUSD",
+    "volume_24h": 133079.61993445
+  },
+  {
+    "pair": "INTRUSD",
+    "altname": "INTRUSD",
+    "base": "INTR",
+    "quote": "ZUSD",
+    "volume_24h": 131600.01472134
+  },
+  {
+    "pair": "ACAUSD",
+    "altname": "ACAUSD",
+    "base": "ACA",
+    "quote": "ZUSD",
+    "volume_24h": 130600.31781586
+  },
+  {
+    "pair": "NYMUSD",
+    "altname": "NYMUSD",
+    "base": "NYM",
+    "quote": "ZUSD",
+    "volume_24h": 124364.42176464
+  },
+  {
+    "pair": "POWRUSD",
+    "altname": "POWRUSD",
+    "base": "POWR",
+    "quote": "ZUSD",
+    "volume_24h": 123595.90170727
+  },
+  {
+    "pair": "DRIFTUSD",
+    "altname": "DRIFTUSD",
+    "base": "DRIFT",
+    "quote": "ZUSD",
+    "volume_24h": 122827.84494
+  },
+  {
+    "pair": "MOODENGUSD",
+    "altname": "MOODENGUSD",
+    "base": "MOODENG",
+    "quote": "ZUSD",
+    "volume_24h": 121446.44217
+  },
+  {
+    "pair": "UNIUSD",
+    "altname": "UNIUSD",
+    "base": "UNI",
+    "quote": "ZUSD",
+    "volume_24h": 120603.99154255
+  },
+  {
+    "pair": "IMXUSD",
+    "altname": "IMXUSD",
+    "base": "IMX",
+    "quote": "ZUSD",
+    "volume_24h": 120563.70041649
+  },
+  {
+    "pair": "SYRUPUSD",
+    "altname": "SYRUPUSD",
+    "base": "SYRUP",
+    "quote": "ZUSD",
+    "volume_24h": 119814.21428
+  },
+  {
+    "pair": "NANOUSD",
+    "altname": "NANOUSD",
+    "base": "NANO",
+    "quote": "ZUSD",
+    "volume_24h": 119550.77208596
+  },
+  {
+    "pair": "LMWRUSD",
+    "altname": "LMWRUSD",
+    "base": "LMWR",
+    "quote": "ZUSD",
+    "volume_24h": 114956.50524
+  },
+  {
+    "pair": "ALPHAUSD",
+    "altname": "ALPHAUSD",
+    "base": "ALPHA",
+    "quote": "ZUSD",
+    "volume_24h": 114791.32984734
+  },
+  {
+    "pair": "SOLUSD",
+    "altname": "SOLUSD",
+    "base": "SOL",
+    "quote": "ZUSD",
+    "volume_24h": 107527.72535566
+  },
+  {
+    "pair": "EOSUSD",
+    "altname": "EOSUSD",
+    "base": "EOS",
+    "quote": "ZUSD",
+    "volume_24h": 106826.33140031
+  },
+  {
+    "pair": "OPUSD",
+    "altname": "OPUSD",
+    "base": "OP",
+    "quote": "ZUSD",
+    "volume_24h": 101419.82635
+  },
+  {
+    "pair": "KMNOUSD",
+    "altname": "KMNOUSD",
+    "base": "KMNO",
+    "quote": "ZUSD",
+    "volume_24h": 100173.86262
+  },
+  {
+    "pair": "REZUSD",
+    "altname": "REZUSD",
+    "base": "REZ",
+    "quote": "ZUSD",
+    "volume_24h": 99890.21512
+  },
+  {
+    "pair": "STGUSD",
+    "altname": "STGUSD",
+    "base": "STG",
+    "quote": "ZUSD",
+    "volume_24h": 98850.48288664
+  },
+  {
+    "pair": "KILTUSD",
+    "altname": "KILTUSD",
+    "base": "KILT",
+    "quote": "ZUSD",
+    "volume_24h": 97483.88168278
+  },
+  {
+    "pair": "RUNEUSD",
+    "altname": "RUNEUSD",
+    "base": "RUNE",
+    "quote": "ZUSD",
+    "volume_24h": 91011.53968965
+  },
+  {
+    "pair": "ZRXUSD",
+    "altname": "ZRXUSD",
+    "base": "ZRX",
+    "quote": "ZUSD",
+    "volume_24h": 86636.53076553
+  },
+  {
+    "pair": "KARUSD",
+    "altname": "KARUSD",
+    "base": "KAR",
+    "quote": "ZUSD",
+    "volume_24h": 81894.81280988
+  },
+  {
+    "pair": "ZEXUSD",
+    "altname": "ZEXUSD",
+    "base": "ZEX",
+    "quote": "ZUSD",
+    "volume_24h": 81845.34897
+  },
+  {
+    "pair": "APTUSD",
+    "altname": "APTUSD",
+    "base": "APT",
+    "quote": "ZUSD",
+    "volume_24h": 80170.55461502
+  },
+  {
+    "pair": "STRDUSD",
+    "altname": "STRDUSD",
+    "base": "STRD",
+    "quote": "ZUSD",
+    "volume_24h": 76304.48559
+  },
+  {
+    "pair": "BONDUSD",
+    "altname": "BONDUSD",
+    "base": "BOND",
+    "quote": "ZUSD",
+    "volume_24h": 70199.09598297
+  },
+  {
+    "pair": "EWTUSD",
+    "altname": "EWTUSD",
+    "base": "EWT",
+    "quote": "ZUSD",
+    "volume_24h": 68428.74403979
+  },
+  {
+    "pair": "OXYUSD",
+    "altname": "OXYUSD",
+    "base": "OXY",
+    "quote": "ZUSD",
+    "volume_24h": 68347.94922567
+  },
+  {
+    "pair": "ARKMUSD",
+    "altname": "ARKMUSD",
+    "base": "ARKM",
+    "quote": "ZUSD",
+    "volume_24h": 67096.48932
+  },
+  {
+    "pair": "INJUSD",
+    "altname": "INJUSD",
+    "base": "INJ",
+    "quote": "ZUSD",
+    "volume_24h": 66963.10005997
+  },
+  {
+    "pair": "BIGTIMEUSD",
+    "altname": "BIGTIMEUSD",
+    "base": "BIGTIME",
+    "quote": "ZUSD",
+    "volume_24h": 66956.9101
+  },
+  {
+    "pair": "KNCUSD",
+    "altname": "KNCUSD",
+    "base": "KNC",
+    "quote": "ZUSD",
+    "volume_24h": 65931.17509609
+  },
+  {
+    "pair": "SKYUSD",
+    "altname": "SKYUSD",
+    "base": "SKY",
+    "quote": "ZUSD",
+    "volume_24h": 65704.34789
+  },
+  {
+    "pair": "CTSIUSD",
+    "altname": "CTSIUSD",
+    "base": "CTSI",
+    "quote": "ZUSD",
+    "volume_24h": 64861.09984003
+  },
+  {
+    "pair": "UNFIUSD",
+    "altname": "UNFIUSD",
+    "base": "UNFI",
+    "quote": "ZUSD",
+    "volume_24h": 64324.91477259
+  },
+  {
+    "pair": "HFTUSD",
+    "altname": "HFTUSD",
+    "base": "HFT",
+    "quote": "ZUSD",
+    "volume_24h": 61882.13583396
+  },
+  {
+    "pair": "TVKUSD",
+    "altname": "TVKUSD",
+    "base": "TVK",
+    "quote": "ZUSD",
+    "volume_24h": 60756.39276103
+  },
+  {
+    "pair": "PSTAKEUSD",
+    "altname": "PSTAKEUSD",
+    "base": "PSTAKE",
+    "quote": "ZUSD",
+    "volume_24h": 59060.49710823
+  },
+  {
+    "pair": "JTOUSD",
+    "altname": "JTOUSD",
+    "base": "JTO",
+    "quote": "ZUSD",
+    "volume_24h": 57116.84067
+  },
+  {
+    "pair": "EIGENUSD",
+    "altname": "EIGENUSD",
+    "base": "EIGEN",
+    "quote": "ZUSD",
+    "volume_24h": 56441.74851
+  },
+  {
+    "pair": "RAYUSD",
+    "altname": "RAYUSD",
+    "base": "RAY",
+    "quote": "ZUSD",
+    "volume_24h": 53554.90539799
+  },
+  {
+    "pair": "FIDAUSD",
+    "altname": "FIDAUSD",
+    "base": "FIDA",
+    "quote": "ZUSD",
+    "volume_24h": 50610.43064452
+  },
+  {
+    "pair": "CVCUSD",
+    "altname": "CVCUSD",
+    "base": "CVC",
+    "quote": "ZUSD",
+    "volume_24h": 46917.99471594
+  },
+  {
+    "pair": "TOKEUSD",
+    "altname": "TOKEUSD",
+    "base": "TOKE",
+    "quote": "ZUSD",
+    "volume_24h": 46361.01545532
+  },
+  {
+    "pair": "PDAUSD",
+    "altname": "PDAUSD",
+    "base": "PDA",
+    "quote": "ZUSD",
+    "volume_24h": 45759.57048
+  }
+]

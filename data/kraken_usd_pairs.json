@@ -1,0 +1,18 @@
+[
+    {"altname": "BTCUSD", "base": "XXBT", "quote": "ZUSD", "volume": "high", "priority": true},
+    {"altname": "ETHUSD", "base": "XETH", "quote": "ZUSD", "volume": "high", "priority": true},
+    {"altname": "SOLUSD", "base": "SOL", "quote": "USD", "volume": "high"},
+    {"altname": "DOTUSD", "base": "DOT", "quote": "USD", "volume": "high"},
+    {"altname": "MATICUSD", "base": "MATIC", "quote": "USD", "volume": "high"},
+    {"altname": "AVAXUSD", "base": "AVAX", "quote": "USD", "volume": "high"},
+    {"altname": "LINKUSD", "base": "LINK", "quote": "USD", "volume": "high"},
+    {"altname": "ATOMUSD", "base": "ATOM", "quote": "USD", "volume": "high"},
+    {"altname": "UNIUSD", "base": "UNI", "quote": "USD", "volume": "high"},
+    {"altname": "AAVEUSD", "base": "AAVE", "quote": "USD", "volume": "high"},
+    {"altname": "LDOUSD", "base": "LDO", "quote": "USD", "volume": "high"},
+    {"altname": "OPUSD", "base": "OP", "quote": "USD", "volume": "high"},
+    {"altname": "NEARUSD", "base": "NEAR", "quote": "USD", "volume": "high"},
+    {"altname": "SNXUSD", "base": "SNX", "quote": "USD", "volume": "high"},
+    {"altname": "FTMUSD", "base": "FTM", "quote": "USD", "volume": "high"},
+    {"altname": "ARBUSDT", "base": "ARB", "quote": "USD", "volume": "high"}
+]
