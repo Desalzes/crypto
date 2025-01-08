@@ -1,222 +1,132 @@
 import pandas as pd
-import numpy as np
-from typing import Dict, Tuple
-from analysis.indicators import Indicators
-from database.db_manager import DatabaseManager
-from analysis.backtester import Backtester
-from analysis.ml_classifier import MarketClassifier
+from typing import Dict, Optional
+from core.indicators import Indicators
 import logging
-import asyncio
 
 class CryptoStrategy:
-    def __init__(self, db: DatabaseManager):
+    def __init__(self, db):
         self.db = db
-        self.min_trade_amount = 10
-        self.backtester = Backtester()
-        self.classifier = MarketClassifier()
-        self.indicator_weights = {
-            'RSI': 0.5,
-            'MACD': 0.5,
-            'Bollinger Bands': 0.5
-        }
-
-    async def analyze_all_timeframes(self, pair: str, ticker: dict, ohlcv_data: dict) -> Dict:
-        """Analyze all timeframes for a trading pair."""
-        try:
-            # Get historical performance from database
-            indicators_performance = {}
-            for timeframe in ['5m', '15m', '1h']:
-                performance = self.db.get_best_indicators(pair, timeframe)
-                if performance:
-                    indicators_performance[timeframe] = performance
-
-            # Validate OHLCV data
-            if not ohlcv_data or not ticker:
-                logging.warning(f"Missing data for {pair}")
-                return self._create_hold_signal(pair)
-
-            # Get ML prediction if available
-            try:
-                ml_prob = self.classifier.predict(ohlcv_data.get('15m', pd.DataFrame()))
-            except Exception as e:
-                logging.error(f"ML prediction error: {e}")
-                ml_prob = 0.5
-
-            # Calculate technical indicators
-            signals = {}
-            for timeframe, data in ohlcv_data.items():
-                if isinstance(data, pd.DataFrame) and not data.empty:
-                    try:
-                        signals[timeframe] = Indicators.calculate_all(data, timeframe)
-                    except Exception as e:
-                        logging.error(f"Error calculating indicators for {timeframe}: {e}")
-                        continue
-
-            if not signals:
-                logging.warning(f"No valid signals calculated for {pair}")
-                return self._create_hold_signal(pair)
-
-            # Calculate combined score using historical performance
-            score = self._calculate_combined_score(
-                signals=signals,
-                ticker=ticker,
-                pair=pair,
-                ml_prob=ml_prob,
-                performance=indicators_performance
-            )
-
-            # Make trading decision
-            decision = self._make_decision(score, pair)
-
-            # Log analysis results
-            self._log_analysis(pair, decision, signals)
-
-            return decision
-
-        except Exception as e:
-            logging.error(f"Error in analyze_all_timeframes for {pair}: {e}")
-            return self._create_hold_signal(pair)
-
-    def _calculate_combined_score(self, signals: Dict, ticker: dict, 
-                                pair: str, ml_prob: float,
-                                performance: Dict) -> tuple:
-        """Calculate combined score using historical performance."""
-        score = 0
-        indicators_used = []
-
-        # Add ML score
-        ml_score = (ml_prob - 0.5) * 2 * 0.4
-        score += ml_score
-        if abs(ml_score) > 0.1:
-            indicators_used.append(f"ML{'+'if ml_score>0 else'-'}")
-
-        # Process each timeframe
-        for timeframe, indicators in signals.items():
-            # Get timeframe weight from historical performance
-            base_weight = self._get_timeframe_weight(timeframe)
-            tf_performance = performance.get(timeframe, {})
-            
-            # RSI + MACD
-            if tf_performance.get('RSI', 0) > 0.5 and tf_performance.get('MACD', 0) > 0.5:
-                rsi_macd = self._check_rsi_macd(indicators)
-                adj_weight = base_weight * max(tf_performance.get('RSI', 0.5), 
-                                            tf_performance.get('MACD', 0.5))
-                score += rsi_macd * adj_weight
-                if rsi_macd != 0:
-                    indicators_used.append(
-                        f"{timeframe}({'RSI+MACD' if rsi_macd > 0 else 'RSI-MACD'})"
-                    )
-
-            # Bollinger Bands
-            if tf_performance.get('BB', 0) > 0.4:
-                bb = self._check_bollinger(indicators, ticker['price'])
-                adj_weight = base_weight * tf_performance.get('BB', 0.5)
-                score += bb * adj_weight
-                if bb != 0:
-                    indicators_used.append(f"{timeframe}(BB{'+-'[bb<0]})")
-
-            # EMAs
-            if tf_performance.get('EMA', 0) > 0.4:
-                ema = self._check_ema(indicators)
-                adj_weight = base_weight * tf_performance.get('EMA', 0.5)
-                score += ema * adj_weight
-                if ema != 0:
-                    indicators_used.append(f"{timeframe}(EMA{'+-'[ema<0]})")
-
-        return score, indicators_used
-
-    def _create_hold_signal(self, pair: str) -> Dict:
-        """Create a hold signal."""
-        return {
-            'action': 'HOLD',
-            'confidence': 0,
-            'summary': '',
-            'indicators': []
-        }
-
-    def _log_analysis(self, pair: str, decision: Dict, signals: Dict):
-        """Log analysis results to database."""
-        try:
-            # Log individual indicator performance
-            for timeframe, indicators in signals.items():
-                for indicator, value in indicators.items():
-                    if isinstance(value, (int, float)):
-                        self.db.update_indicator_performance(
-                            pair=pair,
-                            timeframe=timeframe,
-                            indicator=indicator,
-                            success=1 if decision['action'] != 'HOLD' else 0.5,
-                            total=1
-                        )
-        except Exception as e:
-            logging.error(f"Error logging analysis: {e}")
-
-    def calculate_position_size(self, portfolio_value: float, confidence: float, price: float) -> float:
-        """Calculate the position size based on portfolio value and confidence."""
-        if confidence < 0.2:
-            return 0
-        position_usd = portfolio_value * 0.02 * confidence
-        if position_usd < self.min_trade_amount:
-            return 0
-        return round(position_usd / price, 8)
-
-    def _make_decision(self, score_data: tuple, pair: str) -> Dict:
-        """Make trading decision based on score."""
-        score, indicators = score_data
+        self.logger = logging.getLogger(__name__)
         
-        if abs(score) < 1:
-            return {
-                'action': 'HOLD',
-                'confidence': 0,
-                'summary': ' '.join(indicators),
-                'indicators': indicators
-            }
+    def calculate_position_size(self, portfolio_value: float, confidence: float, price: float) -> float:
+        base_size = portfolio_value * 0.02  # 2% risk per trade
+        adjusted_size = base_size * confidence
+        return min(adjusted_size, portfolio_value * 0.1)  # Max 10% of portfolio
+
+    async def analyze_all_timeframes(self, pair: str, ticker: Dict, ohlcv: Dict) -> Optional[Dict]:
+        try:
+            if not ticker or not ohlcv:
+                return None
+
+            timeframe_scores = {}
+            for timeframe, df in ohlcv.items():
+                if df.empty:
+                    continue
+                    
+                indicators = Indicators.calculate_all(df, timeframe)
+                score = self._analyze_timeframe(indicators)
+                timeframe_scores[timeframe] = score
+
+            if not timeframe_scores:
+                return None
+
+            combined_score = self._calculate_combined_score(timeframe_scores)
+            action, confidence = self._determine_action(combined_score)
             
-        return {
-            'action': 'BUY' if score > 0 else 'SELL',
-            'confidence': min(abs(score)/3, 1),
-            'summary': ' '.join(indicators),
-            'indicators': indicators
+            return {
+                'action': action,
+                'confidence': confidence,
+                'summary': f"Score: {combined_score:.2f}",
+                'signals': timeframe_scores
+            }
+
+        except Exception as e:
+            self.logger.error(f"Error analyzing {pair}: {e}")
+            return None
+
+    def _analyze_timeframe(self, indicators: Dict) -> float:
+        try:
+            score = 0.0
+            
+            # RSI Analysis - More aggressive thresholds
+            rsi = indicators.get('rsi', 50)
+            if rsi < 40:  # Changed from 30
+                score += 0.3
+            elif rsi > 60:  # Changed from 70
+                score -= 0.3
+                
+            # MACD Analysis - More sensitive
+            macd = indicators.get('macd', 0)
+            macd_signal = indicators.get('macd_signal', 0)
+            if macd > macd_signal * 0.8:  # Added multiplier for more triggers
+                score += 0.2
+            else:
+                score -= 0.2
+                
+            # Bollinger Bands Analysis - Wider range
+            bb_lower = indicators.get('bb_lower', 0)
+            bb_upper = indicators.get('bb_upper', 0)
+            bb_mid = indicators.get('bb_mid', 0)
+            current_price = indicators.get('close', bb_mid)
+            
+            if current_price < bb_mid:  # Changed from bb_lower
+                score += 0.2
+            elif current_price > bb_mid:  # Changed from bb_upper
+                score -= 0.2
+                
+            # EMA Analysis - More sensitive
+            ema_short = indicators.get('ema_short', 0)
+            ema_long = indicators.get('ema_long', 0)
+            if ema_short > ema_long * 0.95:  # Added multiplier
+                score += 0.15
+            else:
+                score -= 0.15
+                
+            return score
+            
+        except Exception as e:
+            self.logger.error(f"Error in timeframe analysis: {e}")
+            return 0.0
+
+    def _calculate_combined_score(self, timeframe_scores: Dict[str, float]) -> float:
+        weights = {
+            '1m': 0.1,
+            '5m': 0.2,
+            '15m': 0.3,
+            '1h': 0.4,
+            '4h': 0.5,
+            '1d': 0.6
         }
+        
+        weighted_sum = 0
+        weight_sum = 0
+        
+        for timeframe, score in timeframe_scores.items():
+            weight = weights.get(timeframe, 0.1)
+            weighted_sum += score * weight
+            weight_sum += weight
+            
+        return weighted_sum / weight_sum if weight_sum > 0 else 0
 
-    @staticmethod
-    def _get_timeframe_weight(timeframe: str) -> float:
-        """Get weight for timeframe."""
-        weights = {'1m': 0.4, '5m': 0.35, '15m': 0.25}
-        return weights.get(timeframe, 0.3)
+    def _determine_action(self, score: float) -> tuple:
+        if score > 0.3:  # Changed from 0.5 for more trades
+            confidence = min((score - 0.3) * 2, 1.0)
+            return 'BUY', confidence
+        elif score < -0.3:  # Changed from -0.5
+            confidence = min((abs(score) - 0.3) * 2, 1.0)
+            return 'SELL', confidence
+        else:
+            return 'HOLD', 0.0
 
-    @staticmethod
-    def _check_rsi_macd(indicators: Dict) -> float:
-        """Check RSI and MACD signals."""
-        if indicators['rsi'] < 30 and indicators['macd'] > indicators['macd_signal']:
-            return 1.0
-        elif indicators['rsi'] > 70 and indicators['macd'] < indicators['macd_signal']:
-            return -1.0
-        return 0
+    def get_indicator_weight(self, indicator: str) -> float:
+        weights = {
+            'RSI': 0.3,
+            'MACD': 0.25,
+            'BB': 0.25,
+            'EMA': 0.2
+        }
+        return weights.get(indicator, 0.1)
 
-    @staticmethod
-    def _check_bollinger(indicators: Dict, price: float) -> float:
-        """Check Bollinger Bands signals."""
-        if price < indicators['bb_lower']:
-            return 0.5
-        elif price > indicators['bb_upper']:
-            return -0.5
-        return 0
-
-    @staticmethod
-    def _check_ema(indicators: Dict) -> float:
-        """Check EMA signals."""
-        if indicators['ema_short'] > indicators['ema_long']:
-            return 0.3
-        elif indicators['ema_short'] < indicators['ema_long']:
-            return -0.3
-        return 0
-
-    @staticmethod
-    def _check_ichimoku(indicators: Dict) -> float:
-        """Check Ichimoku signals."""
-        if indicators['tenkan_sen'] > indicators['kijun_sen']:
-            return 0.2
-        elif indicators['tenkan_sen'] < indicators['kijun_sen']:
-            return -0.2
-        return 0
+    def set_indicator_weight(self, indicator: str, weight: float):
+        # For future implementation of dynamic weight adjustment
+        pass

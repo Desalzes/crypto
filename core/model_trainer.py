@@ -7,7 +7,7 @@ import joblib
 import os
 import time
 from market_data.kraken_feed import KrakenFeed
-from analysis.indicators import Indicators
+from core.indicators import Indicators
 import logging
 from datetime import datetime, timedelta
 import json

@@ -6,9 +6,9 @@ from market_data.kraken_feed import KrakenFeed
 from trading.paper_trader import PaperTrader
 from trading.crypto_strategy import CryptoStrategy
 from database.db_manager import DatabaseManager
-from analysis.model_trainer import ModelTrainer
+from core.model_trainer import ModelTrainer
 from utils.error_handler import setup_logging
-from trading_manager import TradingManager
+from trading.trading_manager import TradingManager
 import logging
 
 def print_menu():
@@ -20,19 +20,22 @@ def print_menu():
     return input("\nSelect option (1-4): ")
 
 async def handle_menu(config, db):
+    manager = None
     while True:
         choice = print_menu()
         
         try:
             if choice == "1":
-                manager = TradingManager(config, db, "crypto")
+                if not manager:
+                    manager = TradingManager(config, db, "crypto")
                 try:
                     logging.info("Starting crypto trading...")
                     await manager.run_trading_loop()
                 except KeyboardInterrupt:
                     logging.info("Shutting down crypto trading...")
                 finally:
-                    await manager.cleanup()
+                    if manager:
+                        await manager.cleanup()
                     
             elif choice == "2":
                 trainer = ModelTrainer()
@@ -55,14 +58,16 @@ async def handle_menu(config, db):
                     logging.error(f"Error in model training: {e}")
                     
             elif choice == "3":
-                manager = TradingManager(config, db, "crypto")
+                if not manager:
+                    manager = TradingManager(config, db, "crypto")
                 try:
                     await manager.run_llm_review()
                     await asyncio.sleep(0.1)
                 except Exception as e:
                     logging.error(f"Error in LLM review: {e}")
                 finally:
-                    await manager.cleanup()
+                    if manager:
+                        await manager.cleanup()
                     
             elif choice == "4":
                 logging.info("Exiting program...")
@@ -93,3 +98,4 @@ if __name__ == "__main__":
     except Exception as e:
         logging.error(f"Unexpected error: {e}")
         raise
+

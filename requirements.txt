@@ -4,3 +4,4 @@ pandas
 python-dotenv
 scikit-learn
 python-binance
+tqdm

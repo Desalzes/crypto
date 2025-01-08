@@ -4,7 +4,7 @@ from typing import Dict
 import sys
 import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from analysis.indicators import Indicators
+from core.indicators import Indicators
 import asyncio
 import logging
 import torch

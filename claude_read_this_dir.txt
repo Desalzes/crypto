@@ -1,0 +1,65 @@
+trading/
+├── src
+│   ├── analysis
+│   │   └── llm
+│   │       └── indicator_history.json
+│   ├── config
+│   │   ├── crypto_config.json
+│   │   ├── crypto_pairs.json
+│   │   ├── indicators_config.json
+│   │   ├── trading_config.json
+│   │   └── trading_pairs.json
+│   ├── core
+│   │   ├── __init__.py
+│   │   ├── analyzer.py
+│   │   ├── backtester.py
+│   │   ├── backtester2.py
+│   │   ├── claude_readme.txt
+│   │   ├── data_manager.py
+│   │   ├── indicators.py
+│   │   ├── kraken_feed.py
+│   │   ├── llm_analyzer.py
+│   │   ├── ml_classifier.py
+│   │   ├── model_trainer.py
+│   │   ├── momentum.py
+│   │   ├── parameter_optimizer.py
+│   │   ├── performance_tracker.py
+│   │   ├── research_mode.py
+│   │   ├── strategy_adjustor.py
+│   │   ├── strategy_optimizer.py
+│   │   └── data
+│   │       └── historical
+│   │           └── kraken_usd_pairs.json
+│   ├── market_data
+│   │   ├── __init__.py
+│   │   ├── base_feed.py
+│   │   ├── crypto_feed.py
+│   │   ├── kraken_feed.py
+│   │   └── real_time_feed.py
+│   ├── models
+│   │   ├── feature_names_crypto_20250101
+│   │   ├── feature_names_crypto_20250106
+│   │   ├── feature_names_crypto_20250109
+│   │   ├── market_model_crypto_20250101
+│   │   ├── market_model_crypto_20250106
+│   │   └── market_model_crypto_20250109
+│   ├── trading
+│   │   ├── crypto_strategy.py
+│   │   ├── paper_trader.py
+│   │   └── strategy.py
+│   └── utils
+│       ├── error_handler.py
+│       ├── get_active_pairs.py
+│       ├── kraken_usd_pairs.json
+│       └── progress.py
+├── venv
+│   └── [virtual environment files & folders...]
+├── __init__.py
+├── A_GOALS
+├── claude.txt
+├── main.py
+├── requirements.txt
+├── trade_history.json
+├── trading.db
+├── trading_manager.py
+└── trading_state.json
