@@ -17,6 +17,13 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\logs\trades\trades_20250108.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

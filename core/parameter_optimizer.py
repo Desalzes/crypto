@@ -1,4 +1,6 @@
 """Previous imports and class definition remain the same..."""
+import json
+
 
 def _create_analysis_prompt(self, pair: str, data: Dict, current_params: Dict) -> str:
     return f"""You are a high-frequency crypto trading expert focusing on real-time parameter optimization for {pair}. Your goal is to fine-tune trading parameters for maximum efficiency in rapid market conditions.

@@ -1,14 +1,11 @@
+import asyncio
 import aiohttp
-import time
 import logging
 import pandas as pd
+import time
 from typing import Dict, List, Optional
-from market_data.base_feed import MarketDataFeed
-import os
-import json
-import asyncio
 
-class KrakenFeed(MarketDataFeed):
+class KrakenFeed:
     def __init__(self, api_key: str = None, secret_key: str = None):
         self.api_url = "https://api.kraken.com"
         self.api_version = "0"
@@ -19,13 +16,6 @@ class KrakenFeed(MarketDataFeed):
         self.last_volume_update = 0
         self.last_ohlc_update = 0
         self.cache_duration = 5  # Cache for 5 seconds
-        
-        script_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        config_path = os.path.join(script_dir, 'config', 'crypto_pairs.json')
-        with open(config_path, 'r') as f:
-            config = json.load(f)
-            self.pairs = {p['db']: p['exchange'] for p in config['kraken_pairs']}
-            self.reverse_pairs = {v: k for k, v in self.pairs.items()}
 
     async def close(self):
         if self.session:
@@ -39,10 +29,7 @@ class KrakenFeed(MarketDataFeed):
 
         try:
             ticker_data = await self._api_request('public/Ticker')
-            volumes = [(self.reverse_pairs[k], float(v['v'][1])) 
-                      for k, v in ticker_data.items() 
-                      if k in self.reverse_pairs]
-            
+            volumes = [(pair, float(data['v'][1])) for pair, data in ticker_data.items()]
             sorted_pairs = [pair for pair, _ in sorted(volumes, key=lambda x: x[1], reverse=True)]
             self.volume_cache = sorted_pairs
             self.last_volume_update = current_time
@@ -50,78 +37,40 @@ class KrakenFeed(MarketDataFeed):
 
         except Exception as e:
             logging.error(f"Error getting active pairs: {e}")
-            return list(self.pairs.keys())[:20]
+            return []
 
     async def get_ticker(self, pair: str) -> Optional[Dict]:
-        cache_key = f"ticker_{pair}"
-        current_time = time.time()
-        
-        if cache_key in self.pairs_cache:
-            cached_data, cache_time = self.pairs_cache[cache_key]
-            if current_time - cache_time < self.cache_duration:
-                return cached_data
-
         try:
-            exchange_pair = self.pairs.get(pair, pair)
-            result = await self._api_request('public/Ticker', {'pair': exchange_pair})
-            
-            if result and exchange_pair in result:
-                ticker_data = result[exchange_pair]
-                data = {
+            result = await self._api_request('public/Ticker', {'pair': pair})
+            if result and pair in result:
+                ticker_data = result[pair]
+                return {
                     'price': float(ticker_data['c'][0]),
                     'volume24h': float(ticker_data['v'][1]),
-                    'change24h': (float(ticker_data['c'][0]) - float(ticker_data['o'])) 
-                               / float(ticker_data['o']) * 100
+                    'change24h': (float(ticker_data['c'][0]) - float(ticker_data['o'])) / float(ticker_data['o']) * 100
                 }
-                self.pairs_cache[cache_key] = (data, current_time)
-                return data
             return None
         except Exception as e:
             logging.error(f"Error getting ticker for {pair}: {str(e)}")
             return None
 
     async def get_all_timeframe_data(self, pair: str) -> Dict:
-        timeframes = {
-            '1m': 1, '5m': 5, '15m': 15, 
-            '1h': 60, '4h': 240, '1d': 1440
-        }
-        
-        current_time = time.time()
-        if pair in self.ohlc_cache:
-            cached_data, cache_time = self.ohlc_cache[pair]
-            if current_time - cache_time < self.cache_duration:
-                return cached_data
-
-        tasks = [self._get_timeframe_data(pair, tf_minutes) 
-                for tf_minutes in timeframes.values()]
+        timeframes = {'1m': 1, '5m': 5, '15m': 15, '1h': 60, '4h': 240, '1d': 1440}
+        tasks = [self._get_timeframe_data(pair, tf_minutes) for tf_minutes in timeframes.values()]
         results = await asyncio.gather(*tasks)
-        
-        data = dict(zip(timeframes.keys(), results))
-        self.ohlc_cache[pair] = (data, current_time)
-        return data
+        return dict(zip(timeframes.keys(), results))
 
     async def _get_timeframe_data(self, pair: str, interval: int) -> pd.DataFrame:
         try:
-            exchange_pair = self.pairs.get(pair, pair)
-            data = await self._api_request('public/OHLC', {
-                'pair': exchange_pair,
-                'interval': interval
-            })
-            
-            if data and exchange_pair in data:
-                ohlc_data = data[exchange_pair]
-                df = pd.DataFrame(ohlc_data, columns=[
-                    'timestamp', 'open', 'high', 'low', 'close', 
-                    'vwap', 'volume', 'count'
-                ])
-                
+            data = await self._api_request('public/OHLC', {'pair': pair, 'interval': interval})
+            if data and pair in data:
+                ohlc_data = data[pair]
+                df = pd.DataFrame(ohlc_data, columns=['timestamp', 'open', 'high', 'low', 'close', 'vwap', 'volume', 'count'])
                 df[['open', 'high', 'low', 'close', 'volume']] = df[['open', 'high', 'low', 'close', 'volume']].astype(float)
                 df['timestamp'] = pd.to_datetime(df['timestamp'], unit='s')
                 df.set_index('timestamp', inplace=True)
                 return df
-            
             return pd.DataFrame()
-            
         except Exception as e:
             logging.error(f"Error getting data for {pair}: {e}")
             return pd.DataFrame()
@@ -129,19 +78,15 @@ class KrakenFeed(MarketDataFeed):
     async def _api_request(self, endpoint: str, data: dict = None) -> dict:
         if not self.session:
             self.session = aiohttp.ClientSession()
-            
         if data is None:
             data = {}
-            
         url = f"{self.api_url}/{self.api_version}/{endpoint}"
-        
         try:
             async with self.session.get(url, params=data) as response:
                 if response.status != 200:
                     return {}
                 result = await response.json()
                 return result.get('result', {})
-                
         except Exception as e:
             logging.error(f"API request failed: {str(e)}")
             return {}

@@ -7,6 +7,7 @@ from .market_context import MarketContextAnalyzer
 
 logger = logging.getLogger(__name__)
 
+
 class IntegratedMarketAnalyzer:
     def __init__(self, config: dict = None):
         self.config = config or {}
@@ -16,34 +17,55 @@ class IntegratedMarketAnalyzer:
     def _calculate_position_size(self, portfolio_value: float, confidence: float, risk_level: str = 'HIGH') -> float:
         base_risk = {
             'LOW': 0.02,
-            'MEDIUM': 0.015, 
+            'MEDIUM': 0.015,
             'HIGH': 0.01
         }.get(risk_level, 0.01)
-        
+
         position_size = portfolio_value * base_risk * confidence
         max_position = portfolio_value * 0.1
         return min(position_size, max_position)
 
     async def analyze_market(self, symbol: str, timeframe_data: Dict[str, pd.DataFrame]) -> Dict:
         try:
+            logger.debug(f"Received timeframe data for {symbol}: {list(timeframe_data.keys())}")
+
             one_min_data = timeframe_data.get('1m')
             if one_min_data is None or one_min_data.empty:
+                logger.error(f"No valid 1m data for {symbol}. Data: {one_min_data}")
                 raise ValueError("No 1m timeframe data available")
-            
+            else:
+                logger.debug(f"1m data for {symbol}: {one_min_data.head()}")
+
+            # Validate columns in the 1m data
+            required_columns = {'open', 'high', 'low', 'close', 'volume'}
+            if not required_columns.issubset(one_min_data.columns):
+                logger.error(f"Missing required columns in 1m data for {symbol}: {one_min_data.columns}")
+                return self._default_analysis()
+
+            # Process indicator data
             indicator_data = StructuredIndicatorData(one_min_data)
             indicators = indicator_data.get_combined_analysis()
-            patterns = self.pattern_recognizer.analyze_patterns(one_min_data)
-            market_state = await self._analyze_market_context(timeframe_data)
+            logger.debug(f"Indicators for {symbol}: {indicators}")
 
+            # Analyze patterns
+            patterns = self.pattern_recognizer.analyze_patterns(one_min_data)
+            logger.debug(f"Patterns for {symbol}: {patterns}")
+
+            # Analyze market context
+            market_state = await self._analyze_market_context(timeframe_data)
+            logger.debug(f"Market state for {symbol}: {market_state}")
+
+            # Combine all analyses
             final_analysis = self._combine_analyses(indicators, patterns, market_state)
 
             if not self._validate_analysis(final_analysis):
+                logger.warning(f"Invalid analysis for {symbol}. Returning default analysis.")
                 return self._default_analysis()
 
             return final_analysis
 
         except Exception as e:
-            logger.error(f"Error in market analysis: {str(e)}")
+            logger.error(f"Error in market analysis for {symbol}: {str(e)}")
             return self._default_analysis()
 
     async def _analyze_market_context(self, timeframe_data: Dict[str, pd.DataFrame]) -> Dict:
@@ -69,7 +91,7 @@ class IntegratedMarketAnalyzer:
                     continue
 
             combined_signal = self._calculate_combined_signal(processed_indicators, patterns, market_state)
-            
+
             portfolio_value = 1000
             confidence = combined_signal.get('confidence', 0.0)
             risk_level = market_state.get('risk_level', 'HIGH')
@@ -100,7 +122,7 @@ class IntegratedMarketAnalyzer:
             indicator_signals = [ind['signal'] for ind in indicators.values()]
             buy_signals = indicator_signals.count('BUY')
             sell_signals = indicator_signals.count('SELL')
-            
+
             total_signals = len(indicator_signals)
             if total_signals == 0:
                 return {'action': 'HOLD', 'confidence': 0.0}
@@ -131,9 +153,9 @@ class IntegratedMarketAnalyzer:
 
     def _validate_analysis(self, analysis: Dict) -> bool:
         try:
-            required_fields = ['summary', 'market_context', 'technical_indicators', 
-                             'patterns', 'trading_parameters']
-            
+            required_fields = ['summary', 'market_context', 'technical_indicators',
+                               'patterns', 'trading_parameters']
+
             if not all(field in analysis for field in required_fields):
                 return False
 

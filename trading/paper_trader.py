@@ -4,6 +4,7 @@ import logging
 from typing import Dict
 from datetime import datetime
 import pandas as pd
+import asyncio
 
 class PaperTrader:
     def __init__(self, initial_balance: float = 1000.0):
