@@ -1,4 +1,9 @@
 {
   "balance": 1000.0,
-  "positions": {}
+  "history": [
+    {
+      "balance": 1000.0,
+      "timestamp": "2025-01-08T15:33:34.846162"
+    }
+  ]
 }

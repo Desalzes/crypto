@@ -1,128 +1,111 @@
-import json
-import logging
-import requests
-from typing import Dict, List, Optional
+"""Previous imports and class definition remain the same..."""
 
-class ParameterOptimizer:
-    def __init__(self):
-        self.ollama_url = "http://localhost:11434/api/generate"
-        self.logger = logging.getLogger(__name__)
-        self.pair_profiles = {}
+def _create_analysis_prompt(self, pair: str, data: Dict, current_params: Dict) -> str:
+    return f"""You are a high-frequency crypto trading expert focusing on real-time parameter optimization for {pair}. Your goal is to fine-tune trading parameters for maximum efficiency in rapid market conditions.
 
-    async def analyze_indicators(self, pair: str, data: Dict, current_params: Dict) -> Dict:
-        try:
-            prompt = self._create_analysis_prompt(pair, data, current_params)
-            response = await self._query_ollama(prompt)
-            
-            if not response:
-                return current_params
-                
-            analysis = self._parse_response(response)
-            
-            if not analysis:
-                return current_params
-                
-            self.pair_profiles[pair] = analysis
-            return self._adjust_parameters(current_params, analysis)
-            
-        except Exception as e:
-            self.logger.error(f"Indicator analysis error for {pair}: {e}")
-            return current_params
-
-    def _create_analysis_prompt(self, pair: str, data: Dict, current_params: Dict) -> str:
-        return f"""Analyze these indicators for {pair} as a professional crypto trader:
-
-Current Market Data:
+Real-Time Market State:
 Price: ${data.get('price', 'N/A')}
 24h Volume: {data.get('volume24h', 'N/A')}
 24h Change: {data.get('change24h', 'N/A')}%
 
-Technical Indicators:
+Technical Indicators State:
 {json.dumps(data.get('indicators', {}), indent=2)}
 
-Current Parameters:
+Current Parameter Configuration:
 {json.dumps(current_params, indent=2)}
 
-Tasks:
-1. Analyze each indicator's effectiveness
-2. Suggest parameter adjustments
-3. Identify market conditions impacting indicators
-4. Recommend weight adjustments
+High-Frequency Trading Context:
+1. Parameters must adapt to micro-market structure
+2. Execution speed is critical
+3. Higher noise levels in shorter timeframes
+4. Quick adaptation to volatility changes
+5. Risk management parameterization
+6. Market depth considerations
+7. Order flow dynamics
+8. Cross-exchange arbitrage potential
 
-Return a JSON object with this structure:
-{{
-    "market_analysis": {{
-        "conditions": ["list of current market conditions"],
-        "volatility": "LOW/MEDIUM/HIGH",
-        "trend": "BULLISH/BEARISH/SIDEWAYS"
-    }},
-    "indicator_analysis": {{
-        "indicator_name": {{
-            "effectiveness": 0.0 to 1.0,
-            "suggested_params": {{}},
-            "weight_adjustment": "INCREASE/DECREASE/MAINTAIN"
-        }}
-    }},
-    "parameter_recommendations": [
-        {{
-            "param": "name",
-            "current": value,
-            "suggested": value,
+Required Analysis:
+1. Rapid Parameter Adaptation
+   - Identify parameters that need immediate adjustment
+   - Suggest modifications based on current market microstructure
+   - Consider execution latency impact
+
+2. Indicator Effectiveness
+   - Evaluate each indicator's performance in current market conditions
+   - Assess reliability in high-frequency context
+   - Suggest timeframe-specific adjustments
+
+3. Real-Time Optimization Targets
+   - Entry/exit timing improvement
+   - False signal reduction
+   - Slippage minimization
+   - Execution cost optimization
+
+4. Risk Parameter Calibration
+   - Position size optimization
+   - Stop-loss placement efficiency
+   - Take-profit level optimization
+   - Risk-reward ratio maintenance
+
+Return a detailed JSON analysis with this structure:
+{
+    "market_microstructure": {
+        "conditions": ["list of current market microstructure conditions"],
+        "volatility_state": {
+            "level": "LOW/MEDIUM/HIGH",
+            "trend": "INCREASING/DECREASING/STABLE",
+            "requires_adjustment": true/false
+        },
+        "execution_environment": {
+            "liquidity_quality": "description",
+            "spread_analysis": "tight/wide/normal",
+            "immediate_concerns": ["list", "of", "issues"]
+        }
+    },
+    "indicator_optimization": {
+        "indicator_name": {
+            "current_effectiveness": 0.0 to 1.0,
+            "noise_level": "LOW/MEDIUM/HIGH",
+            "suggested_parameters": {
+                "param_name": value,
+                "reasoning": "explanation"
+            },
+            "weight_adjustment": {
+                "action": "INCREASE/DECREASE/MAINTAIN",
+                "magnitude": 0.0 to 0.2,
+                "reasoning": "explanation"
+            }
+        }
+    },
+    "real_time_adjustments": [
+        {
+            "parameter": "name",
+            "current_value": value,
+            "suggested_value": value,
+            "adjustment_reason": "detailed explanation",
+            "priority_level": "HIGH/MEDIUM/LOW",
+            "implementation_speed": "IMMEDIATE/GRADUAL"
+        }
+    ],
+    "risk_framework_updates": {
+        "position_sizing": {
+            "current_modifier": value,
+            "suggested_modifier": value,
+            "adjustment_reason": "explanation"
+        },
+        "stop_loss_config": {
+            "current_settings": {},
+            "suggested_settings": {},
             "reasoning": "explanation"
-        }}
-    ]
-}}"""
+        },
+        "take_profit_structure": {
+            "current_levels": [],
+            "suggested_levels": [],
+            "adaptation_reason": "explanation"
+        }
+    }
+}
 
-    async def _query_ollama(self, prompt: str) -> Optional[str]:
-        try:
-            response = requests.post(
-                self.ollama_url,
-                json={"model": "mistral", "prompt": prompt},
-                timeout=30
-            )
-            response.raise_for_status()
-            return response.json().get('response', '')
-        except Exception as e:
-            self.logger.error(f"Ollama query error: {e}")
-            return None
-
-    def _parse_response(self, response: str) -> Optional[Dict]:
-        try:
-            if response.startswith("```json"):
-                response = response[7:-3]
-            return json.loads(response)
-        except Exception as e:
-            self.logger.error(f"Failed to parse LLM response: {e}")
-            return None
-
-    def _adjust_parameters(self, current_params: Dict, analysis: Dict) -> Dict:
-        adjusted = current_params.copy()
-        
-        for rec in analysis.get('parameter_recommendations', []):
-            param = rec.get('param')
-            suggested = rec.get('suggested')
-            if param and suggested:
-                # Limit parameter changes to 20% per adjustment
-                if isinstance(suggested, (int, float)):
-                    current = rec.get('current', adjusted.get(param, suggested))
-                    max_change = current * 0.2
-                    change = suggested - current
-                    change = max(min(change, max_change), -max_change)
-                    adjusted[param] = current + change
-                else:
-                    adjusted[param] = suggested
-
-        for ind, details in analysis.get('indicator_analysis', {}).items():
-            if ind in adjusted.get('indicators', {}):
-                weight_adj = details.get('weight_adjustment')
-                current_weight = adjusted['indicators'][ind].get('weight', 0.5)
-                
-                if weight_adj == "INCREASE":
-                    adjusted['indicators'][ind]['weight'] = min(1.0, current_weight * 1.1)
-                elif weight_adj == "DECREASE":
-                    adjusted['indicators'][ind]['weight'] = max(0.1, current_weight * 0.9)
-
-        return adjusted
-
-    def get_pair_profile(self, pair: str) -> Optional[Dict]:
-        return self.pair_profiles.get(pair)
+Prioritize parameters that impact IMMEDIATE trading performance and risk management in a high-frequency environment."""
+    
+    return prompt

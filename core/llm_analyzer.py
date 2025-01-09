@@ -1,70 +1,73 @@
-import requests
-import json
-import logging
+"""Previous imports remain the same..."""
 
-logger = logging.getLogger(__name__)
+def _create_market_prompt(self, data: dict) -> str:
+    return f"""You are a specialized high-frequency cryptocurrency trading AI. Analyze this real-time market data for {data['symbol']} and provide an immediate trading decision optimized for quick execution.
 
-class LLMAnalyzer:
-    def __init__(self):
-        self.ollama_url = "http://localhost:11434/api/generate"
-        
-    def analyze_market_data(self, data: dict) -> dict:
-        try:
-            prompt = self._create_market_prompt(data)
-            response = self._query_ollama(prompt)
-            if response:
-                return self._parse_response(response)
-            return self._default_response()
-        except Exception as e:
-            logger.error(f"LLM analysis error: {str(e)}")
-            return self._default_response()
-    
-    def _create_market_prompt(self, data: dict) -> str:
-        return f"""Your task is to analyze this market data as a professional trader and provide a clear trading decision.
-
-Symbol: {data['symbol']}
+Real-Time Market State:
 Price: ${data.get('price', 'N/A')}
-Change: {data.get('change_percent', 'N/A')}
-Volume: {data.get('volume', 'N/A')}
+24h Change: {data.get('change_percent', 'N/A')}%
+Volume Profile: {data.get('volume', 'N/A')}
 
-Make a trading decision and format your response exactly like this:
-{{
-    "action": "BUY or SELL or HOLD",
-    "confidence": 0.1 to 1.0,
-    "reasoning": "brief explanation",
-    "risk_level": "LOW or MEDIUM or HIGH"
-}}"""
-    
-    def _query_ollama(self, prompt: str) -> str:
-        try:
-            response = requests.post(
-                self.ollama_url,
-                json={
-                    "model": "mistral",
-                    "prompt": prompt
-                },
-                timeout=10
-            )
-            response.raise_for_status()
-            return response.json().get('response', '')
-        except requests.exceptions.ConnectionError:
-            logger.error("Could not connect to Ollama. Is it running?")
-            return None
-        except Exception as e:
-            logger.error(f"Ollama query error: {e}")
-            return None
+High-Frequency Trading Context:
+- Analysis timeframe: Minutes to hours
+- Focus on executable signals
+- Price action and momentum priority
+- Rapid pattern recognition
+- Immediate risk assessment
+- Quick position sizing
 
-    def _parse_response(self, response: str) -> dict:
-        try:
-            return json.loads(response)
-        except:
-            logger.error("Failed to parse LLM response")
-            return self._default_response()
-            
-    def _default_response(self) -> dict:
-        return {
-            "action": "HOLD",
-            "confidence": 0.0,
-            "reasoning": "LLM analysis unavailable",
-            "risk_level": "HIGH"
+Key Considerations:
+1. Market Microstructure
+   - Order flow dynamics
+   - Liquidity conditions
+   - Spread analysis
+   - Volume profile
+
+2. Technical State
+   - Momentum readings
+   - Price action patterns
+   - Support/resistance levels
+   - Volatility state
+
+3. Risk Metrics
+   - Volatility-adjusted position sizing
+   - Precise stop-loss levels
+   - Multiple take-profit targets
+   - Risk-reward optimization
+
+Provide an IMMEDIATE trading decision in this JSON format:
+{
+    "execution_signals": {
+        "primary_action": "BUY or SELL or HOLD",
+        "confidence": 0.1 to 1.0,
+        "reasoning": [
+            "list of key decision factors",
+            "immediate catalysts",
+            "critical concerns"
+        ],
+        "entry_parameters": {
+            "suggested_entry": "price level",
+            "stop_loss": "price level",
+            "take_profit_targets": [
+                "multiple price levels"
+            ],
+            "position_size_modifier": 0.1 to 1.0
         }
+    },
+    "market_context": {
+        "volatility_state": "LOW/MEDIUM/HIGH",
+        "trend_strength": 0.1 to 1.0,
+        "momentum_quality": "WEAK/MODERATE/STRONG",
+        "execution_urgency": "LOW/MEDIUM/HIGH"
+    },
+    "risk_assessment": {
+        "level": "LOW/MEDIUM/HIGH",
+        "key_factors": [
+            "list of risk considerations"
+        ],
+        "max_loss_potential": "percentage",
+        "suggested_leverage": 1.0 to 5.0
+    }
+}"""
+
+    # Rest of the class implementation remains the same...

@@ -9,8 +9,8 @@
     },
     "RSI": {
       "period": 14,
-      "overbought": 70,
-      "oversold": 30,
+      "overbought": 75,
+      "oversold": 25,
       "weight": 0.6
     },
     "MACD": {
@@ -42,19 +42,19 @@
   },
   "ml_model": {
     "weight": 0.8,
-    "confidence_threshold": 0.7,
+    "confidence_threshold": 0.65,
     "update_frequency": "1h"
   },
   "strategy": {
     "risk_level": "medium",
     "max_position_size": 0.1,
-    "stop_loss": 0.02,
+    "stop_loss": 0.03,
     "take_profit": 0.05,
     "max_trades_per_day": 10,
     "min_volume_24h": 1000000,
     "indicator_analysis": {
-      "min_reliability": 0.3,
-      "high_reliability": 0.7,
+      "min_reliability": 0.35,
+      "high_reliability": 0.75,
       "test_threshold": 3
     }
   }

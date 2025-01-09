@@ -11,6 +11,8 @@ class Indicators:
         indicators.update(Indicators.calculate_ema(df))
         indicators.update(Indicators.calculate_ichimoku(df))
         indicators.update(Indicators.calculate_atr(df))
+        indicators.update(Indicators.calculate_obv(df))
+        indicators.update(Indicators.calculate_volume_profile(df))
         return indicators
 
     @staticmethod
@@ -78,3 +80,34 @@ class Indicators:
         true_range = ranges.max(axis=1)
         atr = true_range.rolling(period).mean()
         return {'atr': atr.iloc[-1]}
+
+    @staticmethod
+    def calculate_obv(df: pd.DataFrame):
+        obv = (np.sign(df['close'].diff()) * df['volume']).fillna(0).cumsum()
+        return {'obv': obv.iloc[-1]}
+
+    @staticmethod
+    def calculate_volume_profile(df: pd.DataFrame, price_bins=100):
+        # Calculate volume profile using price levels
+        price_range = df['close'].max() - df['close'].min()
+        bin_size = price_range / price_bins
+        
+        volume_by_price = {}
+        for i in range(price_bins):
+            price_level = df['close'].min() + (i * bin_size)
+            mask = (df['close'] >= price_level) & (df['close'] < price_level + bin_size)
+            volume_by_price[price_level] = df.loc[mask, 'volume'].sum()
+        
+        # Find the Point of Control (price level with highest volume)
+        poc_price = max(volume_by_price.items(), key=lambda x: x[1])[0]
+        
+        return {
+            'volume_profile': volume_by_price,
+            'poc_price': poc_price
+        }
+
+    @staticmethod
+    def calculate_dynamic_stop_loss(df: pd.DataFrame, multiplier=2.0):
+        """Calculate dynamic stop loss based on ATR"""
+        atr = Indicators.calculate_atr(df)['atr']
+        return atr * multiplier
