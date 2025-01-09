@@ -1,0 +1,36 @@
+So the program should run a trading loop using a classification ML algo to trade. An LLM (ollama)
+should manage the entire program where the program would benefit from it.
+
+As it trades it should log what it does for review later.
+When program starts theres 4 options, live trading, train ml, test indicators, llm review
+
+Testing indicators should be testing 2 indicators together and if they score .45 then test 3 indicators together,
+if these score well enough then test 4.
+
+As for llm review the idea is the llm should evaluate the entire program, all files, all config data
+all numbers and it c an be really slow but thats fine.
+
+everything in the program should have a progress bar indicator if it takes more than 5 seconds to complete.
+
+|- analysis
+|  |- config
+|     |- indicators_config.json
+|  |- data_manager.py
+|  |- model_trainer.py
+|- core
+|  |- analysis
+|     |- data_manager.py
+|     |- model_trainer.py
+|  |- trading
+|     |- trading_manager.py
+|- database
+|  |- db_manager.py
+|- market_data
+|  |- kraken_feed.py
+|- trading
+|  |- crypto_strategy.py
+|  |- paper_trader.py
+|- main.py
+|- strategy_optimizer.py
+|- claude.txt
+|- A_GOALS
