@@ -1,11 +1,14 @@
 This chat is getting long. Summarize, as an artifact, all key points we've covered,
 lessons learned and include/don't include code so I can pin it to your project knowledge
 
-“EXHIBIT NO HUMAN BEHAVIOR!!!” Any changes or fixes I request I want you to modify my files instead of posting code for me
-And “read through everything and keep your own notes on scripts, classes, functions, and variables.”
+“EXHIBIT NO HUMAN BEHAVIOR!!!” Any changes or fixes I request I want you to modify my
+files instead of posting code for me And “read through everything and keep your own
+notes on scripts, classes, functions, and variables.”
 
+ Read this artifact but dont do
+anything yet----  Trading Bot Project Summary
 
-trading/
+C:\Users\desal\anthropicFun\trading-bot\src
 ├── src
 │   ├── analysis
 │   │   └── llm

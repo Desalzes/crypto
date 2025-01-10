@@ -44,8 +44,8 @@ class MarketContextAnalyzer:
         }
 
     def _analyze_volatility(self, df: pd.DataFrame) -> Dict:
-        returns = df['close'].pct_change()
-        volatility = returns.std()
+        returns = df['close'].pct_change().replace([np.inf, -np.inf], np.nan).dropna()
+        volatility = returns.std() if not returns.empty else 0
         
         if volatility > 0.02:
             level = 'HIGH'
@@ -61,10 +61,24 @@ class MarketContextAnalyzer:
         }
 
     def _analyze_trend(self, df: pd.DataFrame) -> Dict:
+        if df.empty or len(df) < 50:
+            return {
+                'regime': 'RANGING',
+                'strength': 0.0,
+                'direction': 'NEUTRAL'
+            }
+            
         ema_short = df['close'].ewm(span=20).mean()
         ema_long = df['close'].ewm(span=50).mean()
         
-        trend_strength = abs((ema_short.iloc[-1] - ema_long.iloc[-1]) / ema_long.iloc[-1])
+        if ema_short.empty or ema_long.empty:
+            return {
+                'regime': 'RANGING',
+                'strength': 0.0,
+                'direction': 'NEUTRAL'
+            }
+        
+        trend_strength = abs((ema_short.iloc[-1] - ema_long.iloc[-1]) / ema_long.iloc[-1]) if ema_long.iloc[-1] != 0 else 0
         
         if trend_strength > 0.02:
             if ema_short.iloc[-1] > ema_long.iloc[-1]:
@@ -86,7 +100,14 @@ class MarketContextAnalyzer:
         }
 
     def _analyze_support_resistance(self, df: pd.DataFrame) -> Dict:
-        window = 20
+        if df.empty or len(df) < 20:
+            return {
+                'nearest_support': 0,
+                'nearest_resistance': 0,
+                'price_location': 0.5
+            }
+            
+        window = min(20, len(df))
         high_levels = df['high'].rolling(window=window).max()
         low_levels = df['low'].rolling(window=window).min()
         
@@ -94,16 +115,26 @@ class MarketContextAnalyzer:
         nearest_resistance = high_levels.iloc[-1]
         nearest_support = low_levels.iloc[-1]
 
+        # Avoid division by zero
+        price_range = nearest_resistance - nearest_support
+        if price_range > 0:
+            price_location = (current_price - nearest_support) / price_range
+        else:
+            price_location = 0.5  # Default to middle if no range
+
         return {
             'nearest_support': float(nearest_support),
             'nearest_resistance': float(nearest_resistance),
-            'price_location': (current_price - nearest_support) / (nearest_resistance - nearest_support)
+            'price_location': float(price_location)
         }
 
     def _is_volatility_expanding(self, returns: pd.Series) -> bool:
+        if returns.empty or len(returns) < 20:
+            return False
+            
         recent_vol = returns.tail(10).std()
         older_vol = returns.iloc[-20:-10].std()
-        return recent_vol > older_vol
+        return bool(recent_vol > older_vol)
 
     def _combine_timeframe_analyses(self, tf_analyses: Dict) -> Dict:
         if not tf_analyses:
@@ -138,7 +169,7 @@ class MarketContextAnalyzer:
         final_vol = 'HIGH' if avg_vol > 1.5 else 'MEDIUM' if avg_vol > 0.5 else 'LOW'
 
         # Determine overall regime
-        overall_regime = max(regime_votes.items(), key=lambda x: x[1])[0]
+        overall_regime = max(regime_votes.items(), key=lambda x: x[1])[0] if regime_votes else 'RANGING'
 
         return {
             'regime': overall_regime,
@@ -150,9 +181,9 @@ class MarketContextAnalyzer:
 
     def _default_analysis(self) -> Dict:
         return {
-            'regime': 'UNKNOWN',
-            'volatility': 'HIGH',
+            'regime': 'RANGING',
+            'volatility': 'MEDIUM',
             'trend_strength': 0.0,
             'is_volatility_expanding': False,
-            'risk_level': 'HIGH'
+            'risk_level': 'MEDIUM'
         }

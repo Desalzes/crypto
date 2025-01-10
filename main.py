@@ -7,10 +7,10 @@ from dotenv import load_dotenv
 from market_data.kraken_feed import KrakenFeed
 from trading.paper_trader import PaperTrader
 from trading.crypto_strategy import CryptoStrategy
-from database import DatabaseManager
+from database.db_manager import DatabaseManager
 from core.model_trainer import ModelTrainer
 from utils.error_handler import setup_logging
-from tqdm import tqdm
+from trading.trading_manager import TradingManager
 import logging
 import pandas as pd
 
@@ -23,72 +23,6 @@ def print_menu():
     print("5. Update Database")
     print("6. Exit")
     return input("\nSelect option (1-6): ")
-
-class TradingManager:
-    def __init__(self, config, db, mode="crypto"):
-        self.config = config
-        self.db = db
-        self.mode = mode
-        self.feed = KrakenFeed()
-        self.trader = PaperTrader()
-        self.strategy = CryptoStrategy(db)
-        self.batch_size = 4
-        self.running = False
-        self.last_balance = 1000.00
-        self._http_session = None
-        self.last_request_time = 0
-        self.request_interval = 1.0
-        self.loop_interval = 20
-        self.trade_threshold = 0.45
-
-    async def cleanup(self):
-        self.running = False
-        if self._http_session and not self._http_session.closed:
-            await self._http_session.close()
-        if self.feed:
-            await self.feed.close()
-
-    async def analyze_pairs(self, pairs):
-        with tqdm(total=len(pairs), desc="Analyzing markets") as pbar:
-            results = []
-            for i in range(0, len(pairs), self.batch_size):
-                batch = pairs[i:i+self.batch_size]
-                for pair in batch:
-                    ticker = await self.feed.get_ticker(pair)
-                    if ticker:
-                        results.append((pair, ticker))
-                    pbar.update(1)
-                if i + self.batch_size < len(pairs):
-                    await asyncio.sleep(0.1)
-            return results
-
-    async def run_trading_loop(self):
-        self.running = True
-        print(f"\nStarting trading bot with ${self.trader.get_portfolio_value({}):.2f}")
-        
-        try:
-            while self.running:
-                try:
-                    pairs = await self.feed.get_active_pairs()
-                    pairs = pairs[:14]
-                    results = await self.analyze_pairs(pairs)
-                    
-                    current_value = self.trader.get_portfolio_value({})
-                    print(f"\nPortfolio Value: ${current_value:.2f}")
-                    
-                    if self.running:
-                        print(f"\nWaiting {self.loop_interval} seconds...")
-                        await asyncio.sleep(self.loop_interval)
-
-                except Exception as e:
-                    logging.error(f"Error in trading iteration: {e}")
-                    if self.running:
-                        await asyncio.sleep(self.loop_interval)
-                        
-        except KeyboardInterrupt:
-            logging.info("Trading loop interrupted by user")
-        finally:
-            await self.cleanup()
 
 async def update_database():
     data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'historical')
@@ -117,15 +51,16 @@ async def handle_menu(config, db):
         try:
             if choice == "1":
                 if not manager:
-                    manager = TradingManager(config, db)
+                    manager = TradingManager(config, db, "crypto")
                 try:
                     logging.info("Starting crypto trading...")
-                    await manager.run_trading_loop()
+                    await manager.start()  # Using new WebSocket-based start method
                 except KeyboardInterrupt:
                     logging.info("Shutting down crypto trading...")
                 finally:
                     if manager:
                         await manager.cleanup()
+                        manager = None
                     
             elif choice == "2":
                 trainer = ModelTrainer()
@@ -146,18 +81,21 @@ async def handle_menu(config, db):
                         logging.error("No data downloaded for training")
                 except Exception as e:
                     logging.error(f"Error in model training: {e}")
+                    print(f"\nError during model training: {e}")
                     
             elif choice == "3":
+                print("\nInitiating LLM Review of Indicators...")
                 if not manager:
-                    manager = TradingManager(config, db)
+                    manager = TradingManager(config, db, "crypto")
                 try:
-                    await manager.run_trading_loop()
-                    await asyncio.sleep(0.1)
+                    await manager.run_llm_review()
                 except Exception as e:
-                    logging.error(f"Error in review: {e}")
+                    logging.error(f"Error in LLM review: {e}")
+                    print(f"\nError during LLM review: {e}")
                 finally:
                     if manager:
                         await manager.cleanup()
+                        manager = None
 
             elif choice == "4":
                 state_file = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'trading_state.json')
@@ -170,24 +108,34 @@ async def handle_menu(config, db):
                 }
                 with open(state_file, 'w') as f:
                     json.dump(reset_state, f, indent=2)
-                print("Balance reset to $1000.00")
+                print("\nBalance reset to $1000.00")
                 if manager:
                     await manager.cleanup()
                     manager = None
+                input("\nPress Enter to continue...")
 
             elif choice == "5":
-                print("Updating database files...")
+                print("\nUpdating database files...")
                 await update_database()
-                print("Database update complete")
+                print("\nDatabase update complete")
+                input("\nPress Enter to continue...")
                     
             elif choice == "6":
                 logging.info("Exiting program...")
+                if manager:
+                    await manager.cleanup()
                 break
             else:
-                print("Invalid option. Please try again.")
+                print("\nInvalid option. Please try again.")
+                input("\nPress Enter to continue...")
 
         except Exception as e:
             logging.error(f"Error handling menu choice: {e}")
+            print(f"\nError: {e}")
+            input("\nPress Enter to continue...")
+            if manager:
+                await manager.cleanup()
+                manager = None
 
 async def main():
     setup_logging()
@@ -195,8 +143,13 @@ async def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     config_path = os.path.join(script_dir, 'config', 'indicators_config.json')
     
-    with open(config_path, 'r') as f:
-        config = json.load(f)
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+    except Exception as e:
+        logging.error(f"Error loading config: {e}")
+        print(f"Error loading configuration: {e}")
+        return
     
     db = DatabaseManager()
     await handle_menu(config, db)
@@ -208,4 +161,5 @@ if __name__ == "__main__":
         print("\nProgram terminated by user.")
     except Exception as e:
         logging.error(f"Unexpected error: {e}")
+        print(f"\nUnexpected error: {e}")
         raise
